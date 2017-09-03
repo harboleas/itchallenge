@@ -118,7 +118,9 @@ def exe(c, prg) :
             y = pila.pop()
             x = pila.pop()
             pila.append(ord(prg[y][x]))
-             
+        else :
+            pila.append(ord(c))
+
     elif modo == "cadena" :
         if c == '"' :                 
             modo = "normal"          
@@ -134,11 +136,11 @@ def correr(prog) :
     c = 0
     while c != "@" :
         c = prg[pc[0]][pc[1]]
-        print c
-        print pc
-        raw_input()
+#        print c
+#        print pc
+#        raw_input()
         exe(c, prg)
-        print pila
-        for fila in prg :
-            print "".join(fila)
+#        print pila
+#        for fila in prg :
+#            print "".join(fila)
 
