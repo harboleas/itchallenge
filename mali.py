@@ -1,5 +1,5 @@
 
-base_3 = [-1,0,1]
+base_3 = [0,1,-1]
 
 def num_base(num, base, size) :
     aux = []
@@ -57,6 +57,18 @@ def mat_A_mala(A) :
     if A[-1][-1] == 0 :
         return True
 
+    if A[0][0] == A[1][0] :
+        return True
+
+    if A[0][-1] == A[1][-1] :
+        return True
+
+    if A[-1][0] == A[-2][0] :
+        return True
+
+    if A[-1][-1] == A[-2][-1] :
+        return True
+
     for fila in A :
         for i in xrange(len(fila)-1) :
             if fila[i]*fila[i+1] < 0 :
@@ -78,24 +90,47 @@ def mat_B_mala(B) :
     return mat_A_mala(aux)
 
 
+def gen_num_no_malo_A(filas, cols) :
+
+    a = 0
+
+    aux = []
+    while a < 3**(filas*cols) :
+        A = gen_mat(a, base_3, filas, cols)       
+        if not mat_A_mala(A) :
+            aux.append(a)
+        a += 1
+
+    return aux
+
+def gen_num_no_malo_B(filas, cols) :
+
+    b = 0
+
+    aux = []
+    while b < 3**(filas*cols) :
+        B = gen_mat(b, base_3, filas, cols)       
+        if not mat_B_mala(B) :
+            aux.append(b)
+        b += 1
+
+    return aux
+
+
 def contar_coreo(filas,cols) :
     
     cant = 0
 
-    a = 0
-    b = 0
-    while a < 3**(filas*(cols-1)) :
+    num_a = gen_num_no_malo_A(filas, cols-1)
+    num_b = gen_num_no_malo_B(filas-1, cols)
+
+#    aux1 = []
+
+    for a in num_a :
         A = gen_mat(a, base_3, filas, cols-1)       
-        a += 1
-        if mat_A_mala(A) :
-            continue
-        b = 0
-        while b < 3**((filas-1)*cols) :
+        for b in num_b :
             B = gen_mat(b, base_3, filas-1, cols)
-            b += 1
-            if mat_B_mala(B) :
-                continue
-            print a, b
+#            print a, b, cant
             saltar = False
             for i in xrange(filas) :
                 for j in xrange(cols) :
@@ -106,8 +141,38 @@ def contar_coreo(filas,cols) :
                 if saltar :
                     break
             if not saltar :
+#                aux1.append((a,b))
                 cant += 1
                 break
-    return cant
 
+    return cant#, aux1
+
+def show_coreo(a,b,n) :
+
+    d_a = ["   ", " > ", " < "]
+    d_b = ["   ", " ^ ", " v "]
+
+    A = gen_mat(a, base_3, n, n-1)
+    B = gen_mat(b, base_3, n-1, n)
+ 
+    print A
+    print B
+
+    for i in xrange(n-1) :
+        fila1 = ""
+        fila2 = ""
+        for j in xrange(n-1) :
+            fila1 += " " + d_a[A[i][j]]
+            fila2 += d_b[B[i][j]] + " "
+        j += 1
+        fila2 += d_b[B[i][j]]
+        print fila1
+        print fila2
+    i += 1
+    fila1 = ""
+    for j in xrange(n-1) :
+        fila1 += " " + d_a[A[i][j]]
+    print fila1 
+
+        
 
