@@ -42,14 +42,60 @@ def test_ij(A, B, i, j, filas, cols) :
     else :
         return False
 
+def mat_A_mala(A) :
+    # Descarta las que no pueden ser
+
+    if A[0][0] == 0 :
+        return True
+
+    if A[0][-1] == 0 :
+        return True
+
+    if A[-1][0] == 0 :
+        return True
+
+    if A[-1][-1] == 0 :
+        return True
+
+    for fila in A :
+        for i in xrange(len(fila)-1) :
+            if fila[i]*fila[i+1] < 0 :
+                return True
+    return False
+
+def trasp(mat) :
+
+    aux = []
+    cols = len(mat[0])
+    for j in xrange(cols) :
+        aux.append([fila[j] for fila in mat])
+    return aux
+
+def mat_B_mala(B) :
+    # Descarta las que no pueden ser
+
+    aux = trasp(B)
+    return mat_A_mala(aux)
+
+
 def contar_coreo(filas,cols) :
     
     cant = 0
 
-    for a in xrange(3**(filas*(cols-1))) :
-        A = gen_mat(a, base_3, filas, cols-1)
-        for b in xrange(3**((filas-1)*cols)) :
+    a = 0
+    b = 0
+    while a < 3**(filas*(cols-1)) :
+        A = gen_mat(a, base_3, filas, cols-1)       
+        a += 1
+        if mat_A_mala(A) :
+            continue
+        b = 0
+        while b < 3**((filas-1)*cols) :
             B = gen_mat(b, base_3, filas-1, cols)
+            b += 1
+            if mat_B_mala(B) :
+                continue
+            print a, b
             saltar = False
             for i in xrange(filas) :
                 for j in xrange(cols) :
