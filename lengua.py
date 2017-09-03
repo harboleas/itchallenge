@@ -1,3 +1,4 @@
+
 prg = """52*>: :000p1>\:00g-#v _ v
   v 2-1*2p00 :+1g00\<   $
   > **00g1+/^v,*84      <
@@ -5,7 +6,14 @@ prg = """52*>: :000p1>\:00g-#v _ v
 
 prg2 = prg.split("\n")
 
-pila = []
+class Pila(list) :
+    def pop(self) :
+        if not self :
+           return 0
+        else :
+           return super(Pila, self).pop()
+
+pila = Pila()
 
 pc = [0,0]
 modo = "normal"
@@ -38,7 +46,7 @@ def exe(c, prg) :
                 res = input("Que resultado desea ? ")
             else :
                 exec("res = "+str(b)+c+str(a))
-                pila.append(res)            
+            pila.append(res)            
          
         elif c == "!" :                 
             a = pila.pop()
@@ -69,8 +77,7 @@ def exe(c, prg) :
             dir_y = 1
 
         elif c == "?" :                 
-            dir_x = 1
-            dir_y = 0
+            dir_y,dir_x = random.choice([(0,1),(0,-1),(1,0),(-1,0)])
 
         elif c == "#" :                 
             pc[1]+=2*dir_x
@@ -96,7 +103,8 @@ def exe(c, prg) :
 
         elif c == ":" :                 
             a = pila.pop()
-            pila.append(a*2)
+            pila.append(a)
+            pila.append(a)
         elif c == "\\" :                 
             a = pila.pop()
             b = pila.pop()
@@ -105,9 +113,9 @@ def exe(c, prg) :
         elif c == "$" :
             pila.pop()
         elif c == "." :
-            print pila.pop()
+            print pila.pop(),
         elif c == "," :
-            print chr(pila.pop())
+            print chr(pila.pop()),
 
         elif c == "p" :
             y = pila.pop()
@@ -134,11 +142,11 @@ def correr(prog) :
     c = 0
     while c != "@" :
         c = prg[pc[0]][pc[1]]
-        print c
-        print pc
-        raw_input()
+#        print c
+#        print pc
+#        raw_input()
         exe(c, prg)
-        print pila
-        for fila in prg :
-            print "".join(fila)
+#        print pila
+#        for fila in prg :
+#            print "".join(fila)
 
