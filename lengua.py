@@ -14,119 +14,119 @@ dir_y = 0
 
 def exe(c, prg) :                          
 
-     global modo, dir_x, dir_y
+    global modo, dir_x, dir_y
  
-     if modo == "normal" :
-         if str(0) <= c <= str(9) :        
-             pila.append(int(c))           
+    if modo == "normal" :
+        if str(0) <= c <= str(9) :        
+            pila.append(int(c))           
         
-         elif c in "+*" :                           
-             a = pila.pop()
-             b = pila.pop()
-             exec("res = "+str(a)+c+str(b))
-             pila.append(res)            
+        elif c in "+*" :                           
+            a = pila.pop()
+            b = pila.pop()
+            exec("res = "+str(a)+c+str(b))
+            pila.append(res)            
         
-         elif c == "-" :
-             a = pila.pop()
-             b = pila.pop()
-             pila.append(b-a)            
+        elif c == "-" :
+            a = pila.pop()
+            b = pila.pop()
+            pila.append(b-a)            
  
-         elif c in "/%" :               
-             a = pila.pop()
-             b = pila.pop()
-             if a == 0 :
-                 res = input("Que resultado desea ? ")
-             else :
-                 exec("res = "+str(b)+c+str(a))
-             pila.append(res)            
-    
-         elif c == "!" :                 
-             a = pila.pop()
-             if a :                      
-                 pila.append(0)          
-             else :                      
-                 pila.append(1)          
+        elif c in "/%" :               
+            a = pila.pop()
+            b = pila.pop()
+            if a == 0 :
+                res = input("Que resultado desea ? ")
+            else :
+                exec("res = "+str(b)+c+str(a))
+                pila.append(res)            
+         
+        elif c == "!" :                 
+            a = pila.pop()
+            if a :                      
+                pila.append(0)          
+            else :                      
+                pila.append(1)          
 
-         elif c == "`" :                 
-             a = pila.pop()
-             b = pila.pop()
-             pila.append(1 if b>a else 0)
+        elif c == "`" :                 
+            a = pila.pop()
+            b = pila.pop()
+            pila.append(1 if b>a else 0)
 
-         elif c == ">" :         
-             dir_x = 1
-             dir_y = 0
+        elif c == ">" :         
+            dir_x = 1
+            dir_y = 0
 
-         elif c == "<" :                   
-             dir_x = -1
-             dir_y = 0
+        elif c == "<" :                   
+            dir_x = -1
+            dir_y = 0
 
-         elif c == "^" :                   
-             dir_x = 0
-             dir_y = -1
+        elif c == "^" :                   
+            dir_x = 0
+            dir_y = -1
 
-         elif c == "v" :                   
-             dir_x = 0
-             dir_y = 1
+        elif c == "v" :                   
+            dir_x = 0
+            dir_y = 1
 
-         elif c == "?" :                 
-             dir_x = 1
-             dir_y = 0
+        elif c == "?" :                 
+            dir_x = 1
+            dir_y = 0
 
-         elif c == "#" :                 
-             pc[1]+=2*dir_x
-             pc[0]+=2*dir_y
-             return
+        elif c == "#" :                 
+            pc[1]+=2*dir_x
+            pc[0]+=2*dir_y
+            return
 
-         elif c == "_" :                 
-             a = pila.pop()
-             dir_y = 0
-             if a == 0:                  
-                 dir_x = 1
-             else :                      
-                 dir_x = -1
-         elif c == "|" :                 
-             a = pila.pop()
-             dir_x = 0
-             if a == 0 :         
-                 dir_y = 1
-             else :   
-                 dir_y = -1
-         elif c == '"' :                 
-             modo = "cadena"          
+        elif c == "_" :                 
+            a = pila.pop()
+            dir_y = 0
+            if a == 0:                  
+                dir_x = 1
+            else :                      
+                dir_x = -1
+        elif c == "|" :                 
+            a = pila.pop()
+            dir_x = 0
+            if a == 0 :         
+                dir_y = 1
+            else :   
+                dir_y = -1
+        elif c == '"' :                 
+            modo = "cadena"          
 
-         elif c == ":" :                 
-             a = pila.pop()
-             pila.append(a*2)
-         elif c == "\\" :                 
-             a = pila.pop()
-             b = pila.pop()
-             pila.append(a)
-             pila.append(b)
-         elif c == "$" :
-             pila.pop()
-         elif c == "." :
-             print pila.pop()
-         elif c == "," :
-             print chr(pila.pop())
+        elif c == ":" :                 
+            a = pila.pop()
+            pila.append(a*2)
+        elif c == "\\" :                 
+            a = pila.pop()
+            b = pila.pop()
+            pila.append(a)
+            pila.append(b)
+        elif c == "$" :
+            pila.pop()
+        elif c == "." :
+            print pila.pop()
+        elif c == "," :
+            print chr(pila.pop())
 
-         elif c == "p" :
-             y = pila.pop()
-             x = pila.pop()
-             v = pila.pop()
-             prg[y][x] = chr(v)
-         elif c == "g" :
-             y = pila.pop()
-             x = pila.pop()
-             pila.append(ord(prg[y][x]))
+        elif c == "p" :
+            y = pila.pop()
+            x = pila.pop()
+            v = pila.pop()
+            prg[y][x] = chr(v)
+        elif c == "g" :
+            y = pila.pop()
+            x = pila.pop()
+            pila.append(ord(prg[y][x]))
              
-     elif modo == "cadena" :
-          if c == '"' :                 
-             modo = "normal"          
-          else :
-             pila.append(ord(c)) 
+    elif modo == "cadena" :
+        if c == '"' :                 
+            modo = "normal"          
+        else :
+            pila.append(ord(c)) 
              
-     pc[1]+=dir_x
-     pc[0]+=dir_y
+    pc[1] += dir_x
+    pc[0] += dir_y
  
     
 def correr(prog) :
