@@ -1,5 +1,11 @@
 from mali import num_base
 from primos import es_capicua
+from math import factorial
+
+a = factorial(60)/(factorial(20)*factorial(40))
+b = factorial(40)/(factorial(20)*factorial(20))
+
+total_caminos = a*b
 
 direc = [(1,0,0), (0,1,0), (0,0,1)]
 
@@ -42,35 +48,38 @@ def get_palabra(camino) :
     return palabra
 
 
-#def gen_num_val(size) :
-#
-#    num_val = []
-#
-#    i = 0
-#
-#    while i < 3**size :
-#        cam = num_a_camino(i, size)
-#        if camino_valido(cam) :
-#            num_val.append(i)
-#        i += 1
-#
-#    return num_val
+def gen_num_val() :
 
+    num_val = []
 
-def contar_caminos() :
-
+    size = 31
     i = 0
-    cant = 0
 
-    while i < 3**60 :
-        cam = num_a_camino(i, 60)
+    while i < 3**size :
+        cam = num_a_camino(i, size)
         if camino_valido(cam) :
-            pal = get_palabra(cam) 
+            pal = get_palabra(cam)
             if pal[29] == pal[31] :
-                if es_capicua(pal) :
-                    cant += 1
+                num_val.append(i)
         i += 1
 
-    return cant  
+    return num_val
+
+
+#def contar_caminos() :
+#
+#    i = 0
+#    cant = 0
+#
+#    while i < 3**60 :
+#        cam = num_a_camino(i, 60)
+#        if camino_valido(cam) :
+#            pal = get_palabra(cam) 
+#            if pal[29] == pal[31] :
+#                if es_capicua(pal) :
+#                    cant += 1
+#        i += 1
+#
+#    return cant  
 
 
