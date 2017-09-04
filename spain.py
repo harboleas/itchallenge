@@ -42,15 +42,35 @@ def get_palabra(camino) :
     return palabra
 
 
-def gen_num_val(size) :
+#def gen_num_val(size) :
+#
+#    num_val = []
+#
+#    i = 0
+#
+#    while i < 3**size :
+#        cam = num_a_camino(i, size)
+#        if camino_valido(cam) :
+#            num_val.append(i)
+#        i += 1
+#
+#    return num_val
 
-    num_val = []
 
-    for i in xrange(3**size) :
-        cam = num_a_camino(i, size)
+def contar_caminos() :
+
+    i = 0
+    cant = 0
+
+    while i < 3**60 :
+        cam = num_a_camino(i, 60)
         if camino_valido(cam) :
-            num_val.append(i)
+            pal = get_palabra(cam) 
+            if pal[29] == pal[31] :
+                if es_capicua(pal) :
+                    cant += 1
+        i += 1
 
-    return num_val
+    return cant  
 
 
