@@ -16,11 +16,11 @@ def calcPi():
             k += 1
             n  = nn
             r  = nr
- 
+
 
 from primos import *
 
-def peru_pi() :
+def peru_pi():
 
     pos = 7
     digitos = 7
@@ -29,21 +29,21 @@ def peru_pi() :
     pi.next()   # saco el entero
 
     num = ""
-    for i in xrange(digitos) :
+    for i in xrange(digitos):
         num += str(pi.next())
 
     cant = 0
     cant2 = 1
-    while cant < pos :
-        if cant < 6 :
-            if es_capicua(num) :
-                if es_primo(int(num)) :
+    while cant < pos:
+        if cant < 6:
+            if es_capicua(num):
+                if es_primo(int(num)):
                     cant += 1
                     print num
-        elif cant == 6 :
-            if es_capicua(num) :
+        elif cant == 6:
+            if es_capicua(num):
                 cant2 += 1
-            if cant2 == 7 :
+            if cant2 == 7:
                 cant += 1
                 print num
 
