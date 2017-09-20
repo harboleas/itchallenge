@@ -1,85 +1,56 @@
-from mali import num_base
-from primos import es_capicua
-from math import factorial
-
-a = factorial(60)/(factorial(20)*factorial(40))
-b = factorial(40)/(factorial(20)*factorial(20))
-
-total_caminos = a*b
-
-direc = [(1,0,0), (0,1,0), (0,0,1)]
+import numpy as np
 
 with open("cubo.txt") as f:
     txt = f.read()
 
 mat = txt.split("\n\n")
 
-cubo = [[fila for fila in altura.split()] for altura in mat]
+cubo_orig = np.array([[[val for val in fila]
+                        for fila in altura.split()]
+                        for altura in mat])
 
-def num_a_camino(num, size):
+def contar_caminos(cubo) :
+    """Cuenta los caminos entre los extremos opuestos del cubo que forman palabras
+    capicuas"""
 
-    return num_base(num, direc, size)
+    if cubo[0,0,0] != cubo[-1,-1,-1]:
+        # no hay camino posible
+        return 0
 
-def camino_valido(camino):
+    else:
+        # casos bases
+        if cubo.shape in [(1,1,2), (1,2,1), (2,1,1), (3,1,1), (1,3,1), (1,1,3)]:
+            # solo un caminio posible
+            return 1
+        elif cubo.shape in [(1,2,2), (2,1,2), (2,2,1)]:
+            return 2
 
-    x = 0
-    y = 0
-    z = 0
-    for dx,dy,dz in camino:
-        x += dx
-        y += dx
-        z += dx
-        if x > 20 or y > 20 or z > 20:
-            return False
+        # cuento los caminos de forma inductiva 
+        else:
+            caminos = 0
 
-    return True
+            if cubo.shape[2] > 2:
+                caminos += contar_caminos(cubo[:,:,1:-1])
 
+            if cubo.shape[1] > 1 and cubo.shape[2] > 1:
+                caminos += contar_caminos(cubo[:,:-1,1:])
+                caminos += contar_caminos(cubo[:,1:,:-1])
 
-def get_palabra(camino):
+            if cubo.shape[1] > 2:
+                caminos += contar_caminos(cubo[:,1:-1,:])
 
-    x, y, z = (0,0,0)
-    palabra = cubo[x][y][z]
-    for dx,dy,dz in camino:
-        x += dx
-        y += dy
-        z += dz
-        palabra += cubo[x][y][z]
+            if cubo.shape[0] > 1 and cubo.shape[2] > 1:
+                caminos += contar_caminos(cubo[:-1,:,1:])
+                caminos += contar_caminos(cubo[1:,:,:-1])
 
-    return palabra
+            if cubo.shape[0] > 1 and cubo.shape[1] > 1:
+                caminos += contar_caminos(cubo[:-1,1:,:])
+                caminos += contar_caminos(cubo[1:,:-1,:])
 
+            if cubo.shape[0] > 2:
+                caminos += contar_caminos(cubo[1:-1,:,:])
 
-def gen_num_val():
+            print caminos
+            return caminos
 
-    num_val = []
-
-    size = 31
-    i = 0
-
-    while i < 3**size:
-        cam = num_a_camino(i, size)
-        if camino_valido(cam):
-            pal = get_palabra(cam)
-            if pal[29] == pal[31]:
-                num_val.append(i)
-        i += 1
-
-    return num_val
-
-
-#def contar_caminos():
-#
-#    i = 0
-#    cant = 0
-#
-#    while i < 3**60:
-#        cam = num_a_camino(i, 60)
-#        if camino_valido(cam):
-#            pal = get_palabra(cam) 
-#            if pal[29] == pal[31]:
-#                if es_capicua(pal):
-#                    cant += 1
-#        i += 1
-#
-#    return cant  
-
-
+#  vim: set ts=4 sw=4 tw=79 et :
