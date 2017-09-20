@@ -5,52 +5,77 @@ with open("cubo.txt") as f:
 
 mat = txt.split("\n\n")
 
-cubo_orig = np.array([[[val for val in fila]
-                        for fila in altura.split()]
-                        for altura in mat])
+cubo = np.array([[[val for val in fila]
+                       for fila in altura.split()]
+                       for altura in mat])
 
-def contar_caminos(cubo) :
+#cubo = np.array([[["a","b","b"],["c","b","a"]]])
+
+class Pos(tuple):
+    """Posicion : altura, fila, columna"""
+
+    def __add__(self, b) :
+        return Pos([a_i + b_i for a_i, b_i in zip(self, b)])
+
+    def __sub__(self, b) :
+        return Pos([a_i - b_i for a_i, b_i in zip(self, b)])
+
+    def __mul__(self, n):
+        return Pos([a*n for a in self])
+
+
+def get_size(ini, fin):
+    """Devuelve el tamano de un cubo con esas pos inicial y final"""
+
+    return fin - ini + (1,)*len(ini)
+
+
+ini = Pos([0, 0, 0])
+fin = Pos([20, 20, 20])
+
+def contar_caminos(ini, fin) :
     """Cuenta los caminos entre los extremos opuestos del cubo que forman palabras
     capicuas"""
 
-    if cubo[0,0,0] != cubo[-1,-1,-1]:
+    if cubo[ini] != cubo[fin]:
         # no hay camino posible
         return 0
 
     else:
+        size = get_size(ini, fin)
         # casos bases
-        if cubo.shape in [(1,1,2), (1,2,1), (2,1,1), (3,1,1), (1,3,1), (1,1,3)]:
-            # solo un caminio posible
+        if size in [(1,1,2), (1,2,1), (2,1,1), (3,1,1), (1,3,1), (1,1,3)]:
+            # solo un caminio capicua
             return 1
-        elif cubo.shape in [(1,2,2), (2,1,2), (2,2,1)]:
+        elif size in [(1,2,2), (2,1,2), (2,2,1)]:
+            # dos caminos capicuas
             return 2
 
-        # cuento los caminos de forma inductiva 
+        # cuento los caminos de forma recursiva 
         else:
             caminos = 0
 
-            if cubo.shape[2] > 2:
-                caminos += contar_caminos(cubo[:,:,1:-1])
+            if size[2] > 2:
+                caminos += contar_caminos(ini+(0,0,1), fin-(0,0,1))
 
-            if cubo.shape[1] > 1 and cubo.shape[2] > 1:
-                caminos += contar_caminos(cubo[:,:-1,1:])
-                caminos += contar_caminos(cubo[:,1:,:-1])
+            if size[1] > 1 and size[2] > 1:
+                caminos += contar_caminos(ini+(0,0,1), fin-(0,1,0))
+                caminos += contar_caminos(ini+(0,1,0), fin-(0,0,1))
 
-            if cubo.shape[1] > 2:
-                caminos += contar_caminos(cubo[:,1:-1,:])
+            if size[1] > 2:
+                caminos += contar_caminos(ini+(0,1,0), fin-(0,1,0))
 
-            if cubo.shape[0] > 1 and cubo.shape[2] > 1:
-                caminos += contar_caminos(cubo[:-1,:,1:])
-                caminos += contar_caminos(cubo[1:,:,:-1])
+            if size[0] > 1 and size[2] > 1:
+                caminos += contar_caminos(ini+(0,0,1), fin-(1,0,0))
+                caminos += contar_caminos(ini+(1,0,0), fin-(0,0,1))
 
-            if cubo.shape[0] > 1 and cubo.shape[1] > 1:
-                caminos += contar_caminos(cubo[:-1,1:,:])
-                caminos += contar_caminos(cubo[1:,:-1,:])
+            if size[0] > 1 and size[1] > 1:
+                caminos += contar_caminos(ini+(0,1,0), fin-(1,0,0))
+                caminos += contar_caminos(ini+(1,0,0), fin-(0,1,0))
 
-            if cubo.shape[0] > 2:
-                caminos += contar_caminos(cubo[1:-1,:,:])
+            if size[0] > 2:
+                caminos += contar_caminos(ini+(1,0,0), fin-(1,0,0))
 
-            print caminos
             return caminos
 
 #  vim: set ts=4 sw=4 tw=79 et :
