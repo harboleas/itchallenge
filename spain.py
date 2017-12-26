@@ -33,49 +33,63 @@ def get_size(ini, fin):
 ini = Pos([0, 0, 0])
 fin = Pos([20, 20, 20])
 
+# caminos contados
+caminos_contados = {}
+
+
 def contar_caminos(ini, fin) :
     """Cuenta los caminos entre los extremos opuestos del cubo que forman palabras
     capicuas"""
 
-    if cubo[ini] != cubo[fin]:
-        # no hay camino posible
-        return 0
+    try:
+        # me fijo si es un camino que ya calcule para acelerar el proceso
+        return caminos_contados[(ini,fin)]
 
-    else:
-        size = get_size(ini, fin)
-        # casos bases
-        if size in [(1,1,2), (1,2,1), (2,1,1), (3,1,1), (1,3,1), (1,1,3)]:
-            # solo un caminio capicua
-            return 1
-        elif size in [(1,2,2), (2,1,2), (2,2,1)]:
-            # dos caminos capicuas
-            return 2
+    except:
 
-        # cuento los caminos de forma recursiva 
+        if cubo[ini] != cubo[fin]:
+            # no hay camino posible
+            caminos_contados[(ini,fin)] = 0
+            return 0
+
         else:
-            caminos = 0
+            size = get_size(ini, fin)
+            # casos bases
+            if size in [(1,1,2), (1,2,1), (2,1,1), (3,1,1), (1,3,1), (1,1,3)]:
+                # solo un caminio capicua
+                caminos_contados[(ini,fin)] = 1
+                return 1
+            elif size in [(1,2,2), (2,1,2), (2,2,1)]:
+                # dos caminos capicuas
+                caminos_contados[(ini,fin)] = 2
+                return 2
 
-            if size[2] > 2:
-                caminos += contar_caminos(ini+(0,0,1), fin-(0,0,1))
+            # cuento los caminos de forma recursiva 
+            else:
+                caminos = 0
 
-            if size[1] > 1 and size[2] > 1:
-                caminos += contar_caminos(ini+(0,0,1), fin-(0,1,0))
-                caminos += contar_caminos(ini+(0,1,0), fin-(0,0,1))
+                if size[2] > 2:
+                    caminos += contar_caminos(ini+(0,0,1), fin-(0,0,1))
 
-            if size[1] > 2:
-                caminos += contar_caminos(ini+(0,1,0), fin-(0,1,0))
+                if size[1] > 1 and size[2] > 1:
+                    caminos += contar_caminos(ini+(0,0,1), fin-(0,1,0))
+                    caminos += contar_caminos(ini+(0,1,0), fin-(0,0,1))
 
-            if size[0] > 1 and size[2] > 1:
-                caminos += contar_caminos(ini+(0,0,1), fin-(1,0,0))
-                caminos += contar_caminos(ini+(1,0,0), fin-(0,0,1))
+                if size[1] > 2:
+                    caminos += contar_caminos(ini+(0,1,0), fin-(0,1,0))
 
-            if size[0] > 1 and size[1] > 1:
-                caminos += contar_caminos(ini+(0,1,0), fin-(1,0,0))
-                caminos += contar_caminos(ini+(1,0,0), fin-(0,1,0))
+                if size[0] > 1 and size[2] > 1:
+                    caminos += contar_caminos(ini+(0,0,1), fin-(1,0,0))
+                    caminos += contar_caminos(ini+(1,0,0), fin-(0,0,1))
 
-            if size[0] > 2:
-                caminos += contar_caminos(ini+(1,0,0), fin-(1,0,0))
+                if size[0] > 1 and size[1] > 1:
+                    caminos += contar_caminos(ini+(0,1,0), fin-(1,0,0))
+                    caminos += contar_caminos(ini+(1,0,0), fin-(0,1,0))
 
-            return caminos
+                if size[0] > 2:
+                    caminos += contar_caminos(ini+(1,0,0), fin-(1,0,0))
+
+                caminos_contados[(ini,fin)] = caminos
+                return caminos
 
 #  vim: set ts=4 sw=4 tw=79 et :
