@@ -43,22 +43,23 @@ def validar_coreografia(mat, n):
         for j in xrange(n):
             entran = 0
 
-            if mat[i][j+1] == "<":
+        
+            if j+1 < n and mat[i][j+1] == "<":
                 entran += 1
                 if mat[i][j] == ">":
                     return False
 
-            if mat[i-1][j] == "v":
+            if i-1 >= 0 and mat[i-1][j] == "v":
                 entran += 1
                 if mat[i][j] == "^":
                     return False
 
-            if mat[i][j-1] == ">":
+            if j-1 >= 0 and mat[i][j-1] == ">":
                 entran += 1
                 if mat[i][j] == "<":
                     return False
 
-            if mat[i+1][j] == "^":
+            if i+1 < n and mat[i+1][j] == "^":
                 entran += 1
                 if mat[i][j] == "v":
                     return False
