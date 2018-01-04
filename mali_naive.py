@@ -1,3 +1,6 @@
+# Algoritmo naive, enumera todas las matrices y luego descarta
+# no produce un resultado en un tiempo razonable 
+# Lo dejo escrito porque me gusta la biyeccion entre las mat y los numeros 
 
 def contar_coreografias(n):
 
@@ -6,7 +9,6 @@ def contar_coreografias(n):
     for i in xrange(4**(n*n)):
         mat = gen_mat(i, n)
         if validar_coreografia(mat, n):
-            print mat
             coreos += 1
 
     return coreos
@@ -43,7 +45,6 @@ def validar_coreografia(mat, n):
         for j in xrange(n):
             entran = 0
 
-        
             if j+1 < n and mat[i][j+1] == "<":
                 entran += 1
                 if mat[i][j] == ">":
