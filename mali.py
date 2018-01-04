@@ -1,10 +1,10 @@
 
-def contar_coreos(n, k):
+def contar_coreos(n, k=0, tablero=None):
 
     if k == 0:
         tablero = [[0 for j in xrange(n)] for i in xrange(n)]
-        coreos = 0
 
+    coreos = 0
     i = k / n
     j = k % n
 
@@ -19,7 +19,7 @@ def contar_coreos(n, k):
         else:
             for salto in saltos_posibles:
                 tablero[i][j] = salto
-                coreos += contar_coreos(n, k+1)
+                coreos += contar_coreos(n, k+1, tablero)
             return coreos
 
 
@@ -43,22 +43,22 @@ def calcular_saltos(mat, i, j):
         entran_F = 0
         c = None
         f = None
-        if i-2 >= 0 and tablero[i-2][j] == "v":
+        if i-2 >= 0 and mat[i-2][j] == "v":
             entran_C += 1
         if i-1 >= 0:
-            c = tablero[i-1][j]
+            c = mat[i-1][j]
             if j-1 >= 0:
-                if tablero[i-1][j-1] == ">":
+                if mat[i-1][j-1] == ">":
                     entran_C += 1
-                elif tablero[i-1][j-1] == "v":
+                elif mat[i-1][j-1] == "v":
                     entran_F += 1
-            if j+1 <= n-1 and tablero[i-1][j+1] == "<":
+            if j+1 <= n-1 and mat[i-1][j+1] == "<":
                 entran_C += 1
-        if j-2 >= 0 and tablero[i][j-2] == ">":
+        if j-2 >= 0 and mat[i][j-2] == ">":
             entran_F += 1
 
         if j-1 >= 0:
-            f = tablero[i][j-1]
+            f = mat[i][j-1]
 
         if entran_C > 0 or c == "v" or i == 0:
             posibles.remove("^")
@@ -69,6 +69,12 @@ def calcular_saltos(mat, i, j):
         if j == n-1:
             posibles.remove(">")
 
+        if entran_C == 0:
+            if i == n-1 and entran_F == 0:
+                posibles = []
+            else:
+                posibles = ["^"]
+        elif 
         return posibles
 
 #  vim: set ts=4 sw=4 tw=79 et :
