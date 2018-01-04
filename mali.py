@@ -16,8 +16,8 @@ def contar_coreos(n, k=0, tablero=None):
     else:
         if k == n**2 - 1:
             tablero[i][j] = saltos_posibles[0]
-            print tablero
-            return len(saltos_posibles)
+#            print tablero
+            return 1
         else:
             for salto in saltos_posibles:
                 tablero[i][j] = salto
@@ -64,19 +64,19 @@ def calcular_saltos(mat, i, j):
         if b == "v" or e == ">":
             entran_F = 1
 
-#        if c == "v" and entran_C == 0:
-#            return []
-#        if f == ">" and i == n-1 and entran_F == 0:
-#            return []
-#
-#        if c and f and entran_C == 0 and i == n-1 and entran_F == 0:
-#            return []
-#
-#        if c and entran_C == 0:
-#            return ["^"]
-#
-#        if f and i == n-1 and entran_F == 0:
-#            return ["<"]
+        if c == "v" and entran_C == 0:
+            return []
+        if f == ">" and i == n-1 and entran_F == 0:
+            return []
+
+        if c and f and entran_C == 0 and i == n-1 and entran_F == 0:
+            return []
+
+        if c and entran_C == 0:
+            return ["^"]
+
+        if f and i == n-1 and entran_F == 0:
+            return ["<"]
 
         posibles = [">", "^", "<", "v"]
         if entran_C == 1 or c == "v" or i == 0:
