@@ -1,5 +1,9 @@
 
+pepe = [0]
+
 def contar_coreos(n, k=0, tablero=None):
+
+    pepe[0] += 1
 
     if k == 0:
         tablero = [[None for j in xrange(n)] for i in xrange(n)]
@@ -30,10 +34,7 @@ def calcular_saltos(mat, i, j):
     n = len(mat)
 
     if i == j == 0:
-        return ["v"]
-
-    elif i == 0 and j == 1:
-        return ["<"]
+        return ["v", ">"]
 
     else:
 
@@ -69,32 +70,21 @@ def calcular_saltos(mat, i, j):
 
         ###########################################
 
-        if c and f:
-            if not entran_C and not entran_F:
-                if f == "v" or c == "v":
-                    return []
-                else:
-                    return ["^"]
-            elif not entran_C:
-                if c == "v":
-                    return []
-                else:
-                    return ["^"]
-            elif not entran_F:
-                if f == "v":
-                    return ["<"]
+        if c and f and not entran_C and not entran_F:
+            if f == "v" or c == "v":
+                return []
+            else:
+                return ["^"]
 
-        elif c:
-            if not entran_C:
-                if c == "v":
-                    return []
-                else:
-                    return ["^"]
+        elif c and not entran_C:
+            if c == "v":
+                return []
+            else:
+                return ["^"]
 
-        elif f:
-            if not entran_F:
-                if f == "v":
-                    return ["<"]
+        elif f and not entran_F:
+            if f == "v":
+                return ["<"]
 
         posibles = [">", "^", "<", "v"]
         if entran_C or c == "v" or i == 0:
