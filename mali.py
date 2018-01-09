@@ -30,7 +30,10 @@ def calcular_saltos(mat, i, j):
     n = len(mat)
 
     if i == j == 0:
-        return [">", "v"]
+        return ["v"]
+
+    elif i == 0 and j == 1:
+        return ["<"]
 
     else:
 
@@ -64,24 +67,39 @@ def calcular_saltos(mat, i, j):
         if b == "v" or e == ">":
             entran_F = 1
 
-        if c == "v" and entran_C == 0:
-            return []
-        if f == ">" and i == n-1 and entran_F == 0:
-            return []
+        ###########################################
 
-        if c and f and entran_C == 0 and i == n-1 and entran_F == 0:
-            return []
+        if c and f:
+            if not entran_C and not entran_F:
+                if f == "v" or c == "v":
+                    return []
+                else:
+                    return ["^"]
+            elif not entran_C:
+                if c == "v":
+                    return []
+                else:
+                    return ["^"]
+            elif not entran_F:
+                if f == "v":
+                    return ["<"]
 
-        if c and entran_C == 0:
-            return ["^"]
+        elif c:
+            if not entran_C:
+                if c == "v":
+                    return []
+                else:
+                    return ["^"]
 
-        if f and i == n-1 and entran_F == 0:
-            return ["<"]
+        elif f:
+            if not entran_F:
+                if f == "v":
+                    return ["<"]
 
         posibles = [">", "^", "<", "v"]
-        if entran_C == 1 or c == "v" or i == 0:
+        if entran_C or c == "v" or i == 0:
             posibles.remove("^")
-        if entran_F == 1 or f == ">" or j == 0:
+        if entran_F or f == ">" or j == 0:
             posibles.remove("<")
         if i == n-1:
             posibles.remove("v")
