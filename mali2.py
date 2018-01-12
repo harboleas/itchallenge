@@ -38,32 +38,28 @@ def calcular_saltos(mat, i, j):
 
     n = len(mat)
 
+    posibles = [">>>", "<<<", " v ", " ^ ", "<v ", " v>", "<^ ", " ^>",
+                ">^ ", " ^<", ">v ", " v<"]
+
     if i == j == 0:
         return ["v", ">"]
 
     else:
 
-        #     | j-2  j-1   j   j+1 
-        # ------------------------
-        # i-2 |            A
-        # i-1 |       B    C    D
-        #  i  |  E    F  (i,j)
+        #     | j-1   j   j+1 
+        # -------------------
+        # i-1 |       A    B
+        #  i  |  C  (i,j)
 
-        a = b = c = d = e = f = None
+        a = b = c = None
 
         if i-1 >= 0:
-            c = mat[i-1][j]
-            if i-2 >= 0:
-                a = mat[i-2][j]
-            if j-1 >= 0:
-                b = mat[i-1][j-1]
+            a = mat[i-1][j]
             if j+1 < n:
-                d = mat[i-1][j+1]
+                b = mat[i-1][j+1]
 
         if j-1 >= 0:
-            f = mat[i][j-1]
-            if j-2 >= 0:
-                e = mat[i][j-2]
+            c = mat[i][j-1]
 
         entran_C = 0
         if a == "v" or b == ">" or d == "<":
