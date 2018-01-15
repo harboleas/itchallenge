@@ -23,9 +23,9 @@ def contar_coreos(n, k=0, tablero=None):
     else:
         if k == n**2 - 1:
             tablero[i][j] = saltos_posibles[0]
-#            print i+1,j+1
-#            for f in tablero:
-#                print f
+            print i+1,j+1
+            for f in tablero:
+                print f
             return 1
         else:
             for salto in saltos_posibles:
@@ -95,24 +95,81 @@ def calcular_saltos(mat, i, j):
         elif c[2] == ">" and a[1] == "^":
             return [">^ "]
         elif c[2] == ">":
-            if i == n-1 or j == n-1:
+            if i == j == n-1:
                 return []
+            elif j == n-1:
+                return [">v "]
+            elif i == n-1:
+                if b[1] == "v":
+                    return []
+                else:
+                    return [">>>"]
             else:
                 if b[1] == "v":
-                    return [">v"]
+                    return [">v "]
                 else:
                     return [">v ", ">>>"]
+
         elif c[2] == "<" and a[1] == "v":
             return ["<v "]
         elif c[2] == "<" and a[1] == "^":
             return []
         elif c[2] == "<":
-            if j == n-1:
+            if i == j == n-1:
                 return []
+            elif j == n-1:
+                return ["<^ "]
+            elif i == n-1:
+                if b[1] == "^":
+                    return []
+                else:
+                    return ["<<<"]
             else:
-                return ["<<<"]
+                if b[1] == "^":
+                    return ["<^ "]
+                else:
+                    return ["<^ ", "<<<"]
+
         elif a[1] == "v":
-            if 
+            if i == j == n-1:
+                return []
+            elif j == n-1:
+                return [" v "]
+            elif i == n-1:
+                if b[1] == "v":
+                    return []
+                else:
+                    return [" v>"]
+            else:
+                if b[1] == "v":
+                    return [" v "]
+                else:
+                    return [" v ", " v>"]
+
+        elif a[1] == "^":
+            if i == j == n-1:
+                return []
+            elif j == n-1:
+                return [" ^ "]
+            elif i == n-1:
+                if b[1] == "^":
+                    return []
+                else:
+                    return [" ^<"]
+            else:
+                if b[1] == "^":
+                    return [" ^ "]
+                else:
+                    return [" ^ ", " ^<"]
+
+        else:
+             if i == n-1 or j == n-1:
+                return []
+             else:
+                if b[1] == "v":
+                    return [" v<"]
+                else:
+                    return [" v< ", " ^>"]
 
 
 #  vim: set ts=4 sw=4 tw=79 et :
