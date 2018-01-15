@@ -38,69 +38,81 @@ def calcular_saltos(mat, i, j):
 
     n = len(mat)
 
-    posibles = [">>>", "<<<", " v ", " ^ ", "<v ", " v>", "<^ ", " ^>",
-                ">^ ", " ^<", ">v ", " v<"]
+    #     | j-1   j   j+1 
+    # -------------------
+    # i-1 |       A    B
+    #  i  |  C  (i,j)
 
-    if i == j == 0:
-        return ["v", ">"]
+    a = b = c = None
+
+    if i-1 >= 0:
+        a = mat[i-1][j]
+        if j+1 < n:
+            b = mat[i-1][j+1]
+
+    if j-1 >= 0:
+        c = mat[i][j-1]
+
+    if not a and not c:
+        return [" ^>", " v<"]
+
+    elif not a:
+        if c[2] == ">":
+            if j == n-1:
+                return [">v "]
+            else:
+                return [">>>", ">v "]
+        elif c[2] == "<":
+            if j == n-1:
+                return ["<^ "]
+            else:
+                return ["<<<", "<^ "]
+        else: # " "
+            return [" ^>", " v<"]
+
+    elif not c:
+        if a[1] == "v" and b[1] != "v":
+            if i == n-1:
+                return [" v>"]
+            else:
+                return [ " v ", " v>"]
+        elif a[1] == "v":
+            if i == n-1:
+                return []
+            else:
+                return [" v "]
+        else:
+            if b == " ^ " and i == n-1:
+                return []
+            elif i == n-1:
+                return [" ^<"]
+            else:
+                return [" ^ ", " ^<"]
 
     else:
-
-        #     | j-1   j   j+1 
-        # -------------------
-        # i-1 |       A    B
-        #  i  |  C  (i,j)
-
-        a = b = c = None
-
-        if i-1 >= 0:
-            a = mat[i-1][j]
-            if j+1 < n:
-                b = mat[i-1][j+1]
-
-        if j-1 >= 0:
-            c = mat[i][j-1]
-
-        entran_C = 0
-        if a == "v" or b == ">" or d == "<":
-            entran_C = 1
-
-        entran_F = 0
-        if b == "v" or e == ">":
-            entran_F = 1
-
-        entran = 0
-        if f == ">" or c == "v":
-            entran = 1
-
-        ###########################################
-
-        if c and f and not entran_C and not entran_F:
-            if f == "v" or c == "v":
-               return []
+        if c[2] == ">" and a[1] == "v":
+            return []
+        elif c[2] == ">" and a[1] == "^":
+            return [">^ "]
+        elif c[2] == ">":
+            if i == n-1 or j == n-1:
+                return []
             else:
-                return ["^"]
-
-        elif c and not entran_C:
-            if c == "v":
-               return []
+                if b[1] == "v":
+                    return [">v"]
+                else:
+                    return [">v ", ">>>"]
+        elif c[2] == "<" and a[1] == "v":
+            return ["<v "]
+        elif c[2] == "<" and a[1] == "^":
+            return []
+        elif c[2] == "<":
+            if j == n-1:
+                return []
             else:
-                return ["^"]
+                return ["<<<"]
+        elif a[1] == "v":
+            if 
 
-        elif f and not entran_F:
-            if f == "v":
-                return ["<"]
-
-        posibles = [">", "^", "<", "v"]
-        if entran_C or c == "v" or i == 0:
-            posibles.remove("^")
-        if entran_F or f == ">" or j == 0:
-            posibles.remove("<")
-        if i == n-1 or (j == n-1 and not entran):
-            posibles.remove("v")
-        if j == n-1 or d == "v":
-            posibles.remove(">")
-
-        return posibles
 
 #  vim: set ts=4 sw=4 tw=79 et :
