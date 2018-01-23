@@ -108,9 +108,10 @@ def calcular_saltos(mat, i, j):
         if entran_F or f == ">" or j == 0 or (i == n-2 and j == 1 and f ==
                 "^"):
             posibles.remove("<")
-        if i == n-1 or (j == n-1 and not entran):
+        if i == n-1 or (j == n-1 and not entran) or (i == 0 and j == n-2 and f
+                == ">") :
             posibles.remove("v")
-        if j == n-1 or d == "v":
+        if j == n-1 or d == "v" or (j == 0 and i == n-2 and c == "v"):
             posibles.remove(">")
 
         return posibles
