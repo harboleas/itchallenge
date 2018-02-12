@@ -1,10 +1,7 @@
-llamadas = [0]
 
 def contar_coreos(n, k=0, tablero=None):
     """Cuenta las coreografias de las pulgas
        generandolas de forma recursiva"""
-
-    llamadas[0] += 1
 
     if k == 0:
         tablero = [[None for j in xrange(n)] for i in xrange(n)]
@@ -13,7 +10,7 @@ def contar_coreos(n, k=0, tablero=None):
     i = k / n
     j = k % n
 
-    saltos_posibles = determinar_saltos(tablero, i, j)
+    saltos_posibles = determinar_saltos2(tablero, i, j)
 
     if not saltos_posibles:
        return 0
@@ -34,30 +31,17 @@ def contar_coreos(n, k=0, tablero=None):
             return coreos
 
 
-class list_(list):
-    """Solo modifico el comportamiento del remove"""
-
-    def remove(self, elem):
-
-        try:
-            list.remove(self, elem)
-        except:
-            pass
-
-
 def determinar_saltos(mat, i, j):
     """Determina los posibles saltos entrantes y salientes a la casilla"""
 
     n = len(mat)
 
-    # posibles = ["-: ", "_: ", " :_", " :-", "---", " | "]
-
-    #     |  j-1   j   j+1 
-    # --------------------
-    # i-1 |        A    C 
+    #     |  j-1   j    
+    # -----------------
+    # i-1 |        A     
     #  i  |   B  (i,j) 
 
-    a = b = c = d = None
+    a = b = None
 
     if i-1 >= 0:
         a = mat[i-1][j]
@@ -65,64 +49,177 @@ def determinar_saltos(mat, i, j):
     if j-1 >= 0:
         b = mat[i][j-1]
 
-    if i-1 >= 0 and j+1 <= n-1:
-        c = mat[i-1][j+1]
+    ###########################################
+
+    if i == 0:
+        if j == 0:
+            return [" ^>", " v<"]
+        elif j == n-1:
+            if b == " ^>" or b == ">>>":
+                return [">v "]
+            elif b == " v<" or b == "<<<":
+                return ["<^ "]
+            else:
+                return []
+        elif b == " ^>" or b == ">>>":
+            return [">>>", ">v "]
+        elif b == ">v " or b == "<^ ":
+            return [" ^>", " v<"]
+        elif b == " v<" or b == "<<<":
+            return ["<<<", "<^ "]
+        else:
+            return []
+
+    elif j == 0:
+        if i == n-1:
+            if a == " v " or a == " v<":
+                return [" v>"]
+            elif a == " ^ " or a == " ^<" or a == " ^>":
+                return [" ^<"]
+            else:
+                return []
+        elif a == " v " or a == " v<":
+            return [" v ", " v>"]
+        elif a == " v>" or a == " ^<":
+            return [" ^>", " v<"]
+        elif a == " ^ " or a == " ^>":
+            return [" ^ ", " ^<"]
+        else:
+            return []
+
+    elif a == "<^ " or a == " ^ " or a == " ^>":
+        if b == " v>" or b == ">>>" or b == " ^>":
+            return [">^ "]
+        elif b == " ^<" or b == "<<<" or b == " v<":
+            return []
+        else:
+            if i < n-1 and j < n-1:
+                return [" ^ ", " ^<"]
+            elif j < n-1:
+                return [" ^<"]
+            elif i < n-1:
+                return [" ^ "]
+            else:
+                return []
+
+    elif a == ">v " or a == " v " or a == " v<":
+        if b == " ^<" or b == "<<<" or b == " v<":
+            return ["<v "]
+        elif b == " v>" or b == ">>>" or b == " ^>":
+            return []
+        else:
+            if i < n-1 and j < n-1:
+                return [" v ", " v>"]
+            elif j < n-1:
+                return [" v>"]
+            elif i < n-1:
+                return [" v "]
+            else:
+                return []
+
+    else:
+        if b == " ^<" or b == "<<<" or b == " v<":
+            if i < n-1 and j < n-1:
+                return ["<<<", "<^ "]
+            elif j < n-1:
+                return ["<<<"]
+            elif i < n-1:
+                return ["<^ "]
+            else:
+                return []
+        elif b == " v>" or b == ">>>" or b == " ^>":
+            if i < n-1 and j < n-1:
+                return [">>>", ">v "]
+            elif j < n-1:
+                return [">>>"]
+            elif i < n-1:
+                return [">v "]
+            return []
+        else:
+            if i < n-1 and j < n-1:
+                return [" v<", " ^>"]
+            else:
+                return []
+
+
+def determinar_saltos2(mat, i, j):
+    """Determina los posibles saltos a y desde la casilla"""
+
+    n = len(mat)
+
+    #     |  j-1   j    
+    # -----------------
+    # i-1 |        A     
+    #  i  |   B  (i,j) 
+
+    a = b = None
+
+    if i-1 >= 0:
+        a = mat[i-1][j]
+
+    if j-1 >= 0:
+        b = mat[i][j-1]
 
     ###########################################
 
-    posibles = list_(["-: ", "_: ", " :_", " :-", "---", " | "])
-
     if i == 0:
-        posibles.remove(" | ")
-        posibles.remove("_: ")
-        posibles.remove(" :_")
-
-    if j == 0:
-        posibles.remove("---")
-        posibles.remove("_: ")
-        posibles.remove("-: ")
-
-    if i == 0 and j == n-2:
-        posibles.remove("-: ")
-
-    if j == 0 and i == n-2:
-        posibles.remove(" :_")
-
-    if i == n-1:
-        posibles.remove(" | ")
-        posibles.remove("-: ")
-        posibles.remove(" :-")
-
-    if j == n-1:
-        posibles.remove("---")
-        posibles.remove(" :_")
-        posibles.remove(" :-")
-
-    if c == "_: " and j == n-2:
-        posibles.remove(" | ")
-        posibles.remove("_: ")
-        posibles.remove("-: ")
-
-    if a :
-        if a == "---" or a == "_: " or a == " :_":
-            posibles.remove("_: ")
-            posibles.remove(" :_")
-            posibles.remove(" | ")
+        if j == 0:
+            return [" :-"]
+        elif j == n-1:
+            if b == " :-" or b == "---":
+                return ["-: "]
+            else:
+                return []
+        elif b == " :-" or b == "---":
+            return ["---", "-: "]
+        elif b == "-: ":
+            return [" :-"]
         else:
-            posibles.remove("-: ")
-            posibles.remove(" :-")
-            posibles.remove("---")
+            return []
 
-    if b:
-        if b == " | " or b == "_: " or b == "-: ":
-            posibles.remove("---")
-            posibles.remove("_: ")
-            posibles.remove("-: ")
+    elif j == 0:
+        if i == n-1:
+            if a == " | " or a == " :-":
+                return [" :_"]
+            else:
+                return []
+        elif a == " | " or a == " :-":
+            return [" | ", " :_"]
+        elif a == " :_":
+            return [" :-"]
         else:
-            posibles.remove(" | ")
-            posibles.remove(" :-")
-            posibles.remove(" :_")
+            return []
 
-    return posibles
+    elif a == "-: " or a == " | " or a == " :-":
+        if b == " :_" or b == "---" or b == " :-":
+            return ["_: "]
+        else:
+            if i < n-1 and j < n-1:
+                return [" | ", " :_"]
+            elif j < n-1:
+                return [" :_"]
+            elif i < n-1:
+                return [" | "]
+            else:
+                return []
+
+    else:
+        if b == " :_" or b == "---" or b == " :-":
+            if i < n-1 and j < n-1:
+                return ["---", "-: "]
+            elif j < n-1:
+                return ["---"]
+            elif i < n-1:
+                return ["-: "]
+            else:
+                return []
+        else:
+            if i < n-1 and j < n-1:
+                return [" :-"]
+            else:
+                return []
+
+
+
 
 #  vim: set ts=4 sw=4 tw=79 et :
