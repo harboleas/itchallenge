@@ -1,3 +1,13 @@
+# Se tiene un cubo formado por letras, la dimensión del cubo es 21x21x21. Se desea recorrer todos los caminos posibles desde la celda (1,1,1) hasta la (21,21,21), con la restricción de que los movimientos posibles son incrementando uno y solo uno de los indices por vez.
+# 
+# Por ejemplo desde el punto (2,2,2) solo es posible pasar al (3,2,2) o al (2,3,2) o al (2,2,3). Pero no es posible ningún otro movimiento, por ejemplo no es posible pasar al (4,2,2) ni al (1,2,2)
+# 
+# El objetivo es contar cuantos de estos caminos posibles forman palíndromos. La respuesta debe ser la cantidad de caminos distintos que forman palíndromos.
+# 
+# Como entrada se debe utilizar el conjunto de datos de level4.txt. En el mismo se presentan 21 matrices separadas por un salto de linea, donde cada matriz es de 21x21.
+# 
+# Podes encontrar el adjunto en https://s3.amazonaws.com/it.challenge/level4.txt
+
 import numpy as np
 
 with open("cubo.txt") as f:

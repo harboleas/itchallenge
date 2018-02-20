@@ -34,3 +34,4 @@ def es_prod_primos(n):
 
     return False
 
+#  vim: set ts=4 sw=4 tw=79 et :
