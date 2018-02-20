@@ -1,44 +1,44 @@
-# Buchu, nuestro coleccionista de insectos y coreógrafo, tiene una tablero de damas donde suele desparramar pulgas para que las mismas ejecuten pasos de baile.
+# Buchu, nuestro coleccionista de insectos y coreografo, tiene una tablero de damas donde suele desparramar pulgas para que las mismas ejecuten pasos de baile.
 # 
-# La coreografía que le enseñó consiste en que cada una de las pulgas debe situarse en una casilla, cuando las 100 están en su posición, Buchu toca el silbato y las pulgas saltan al casillero anexo (pueden saltar para las cuatro casillas anexas, salvo las del borde, no se pueden salir del tablero). 
+# La coreografia que le enseno consiste en que cada una de las pulgas debe situarse en una casilla, cuando las 100 estan en su posicion, Buchu toca el silbato y las pulgas saltan al casillero anexo (pueden saltar para las cuatro casillas anexas, salvo las del borde, no se pueden salir del tablero). 
 # 
-# Están tan bien entrenadas que cuando saltan saben que no tienen que cruzar el mismo borde de cada casilla, sino chocarían en el aire.
+# Estan tan bien entrenadas que cuando saltan saben que no tienen que cruzar el mismo borde de cada casilla, sino chocarian en el aire.
 # 
-# Obviamente también caen todas en una casilla diferente, siempre hay una pulga por casilla, es un salto coordinado perfecto.
+# Obviamente tambien caen todas en una casilla diferente, siempre hay una pulga por casilla, es un salto coordinado perfecto.
 # 
-# Buchu, es tan meticuloso, que siempre quiere una coreografía distinta, y se propuso a anotar todas las diferentes opciones que el salto sincronizado de pulgas puede generar. 
+# Buchu, es tan meticuloso, que siempre quiere una coreografia distinta, y se propuso a anotar todas las diferentes opciones que el salto sincronizado de pulgas puede generar. 
 # 
-# ¿Cuál es este número?
+# Cual es este numero
 
-def contar_coreos(n, k=0, tablero=None):
+def contar_coreos(n, m, k=0, tablero=None):
     """Cuenta las coreografias de las pulgas
        generandolas de forma recursiva"""
 
     if k == 0:
-        tablero = [[None for j in xrange(n)] for i in xrange(n)]
+        tablero = [[None for j in xrange(m)] for i in xrange(n)]
 
     coreos = 0
-    i = k / n
-    j = k % n
+    i = k / m
+    j = k % m
 
-    saltos_posibles = determinar_saltos2(tablero, i, j)
+    saltos_posibles = determinar_saltos(tablero, i, j)
 
     if not saltos_posibles:
        return 0
 
     else:
-        if k == n**2 - 1:
+        if k == n*m - 1:
             tablero[i][j] = saltos_posibles[0]
-#            print "\ntablero"
-#            for fila in tablero:
-#                for col in fila:
-#                    print col,
-#                print "\n"
+            print "\ntablero"
+            for fila in tablero:
+                for col in fila:
+                    print col,
+                print "\n"
             return 1
         else:
             for salto in saltos_posibles:
                 tablero[i][j] = salto
-                coreos += contar_coreos(n, k+1, tablero)
+                coreos += contar_coreos(n, m, k+1, tablero)
             return coreos
 
 
@@ -46,6 +46,7 @@ def determinar_saltos(mat, i, j):
     """Determina los posibles saltos entrantes y salientes a la casilla"""
 
     n = len(mat)
+    m = len(mat[0])
 
     #     |  j-1   j    
     # -----------------
@@ -65,7 +66,7 @@ def determinar_saltos(mat, i, j):
     if i == 0:
         if j == 0:
             return [" ^>", " v<"]
-        elif j == n-1:
+        elif j == m-1:
             if b == " ^>" or b == ">>>":
                 return [">v "]
             elif b == " v<" or b == "<<<":
@@ -104,9 +105,9 @@ def determinar_saltos(mat, i, j):
         elif b == " ^<" or b == "<<<" or b == " v<":
             return []
         else:
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return [" ^ ", " ^<"]
-            elif j < n-1:
+            elif j < m-1:
                 return [" ^<"]
             elif i < n-1:
                 return [" ^ "]
@@ -119,9 +120,9 @@ def determinar_saltos(mat, i, j):
         elif b == " v>" or b == ">>>" or b == " ^>":
             return []
         else:
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return [" v ", " v>"]
-            elif j < n-1:
+            elif j < m-1:
                 return [" v>"]
             elif i < n-1:
                 return [" v "]
@@ -130,24 +131,24 @@ def determinar_saltos(mat, i, j):
 
     else:
         if b == " ^<" or b == "<<<" or b == " v<":
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return ["<<<", "<^ "]
-            elif j < n-1:
+            elif j < m-1:
                 return ["<<<"]
             elif i < n-1:
                 return ["<^ "]
             else:
                 return []
         elif b == " v>" or b == ">>>" or b == " ^>":
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return [">>>", ">v "]
-            elif j < n-1:
+            elif j < m-1:
                 return [">>>"]
             elif i < n-1:
                 return [">v "]
             return []
         else:
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return [" v<", " ^>"]
             else:
                 return []
@@ -157,6 +158,7 @@ def determinar_saltos2(mat, i, j):
     """Determina los posibles saltos a y desde la casilla"""
 
     n = len(mat)
+    m = len(mat[0])
 
     #     |  j-1   j    
     # -----------------
@@ -176,7 +178,7 @@ def determinar_saltos2(mat, i, j):
     if i == 0:
         if j == 0:
             return [" :-"]
-        elif j == n-1:
+        elif j == m-1:
             if b == " :-" or b == "---":
                 return ["-: "]
             else:
@@ -205,9 +207,9 @@ def determinar_saltos2(mat, i, j):
         if b == " :_" or b == "---" or b == " :-":
             return ["_: "]
         else:
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return [" | ", " :_"]
-            elif j < n-1:
+            elif j < m-1:
                 return [" :_"]
             elif i < n-1:
                 return [" | "]
@@ -216,16 +218,16 @@ def determinar_saltos2(mat, i, j):
 
     else:
         if b == " :_" or b == "---" or b == " :-":
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return ["---", "-: "]
-            elif j < n-1:
+            elif j < m-1:
                 return ["---"]
             elif i < n-1:
                 return ["-: "]
             else:
                 return []
         else:
-            if i < n-1 and j < n-1:
+            if i < n-1 and j < m-1:
                 return [" :-"]
             else:
                 return []
