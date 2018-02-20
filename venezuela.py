@@ -10,12 +10,12 @@ def contar_trazos(pared):
         estado = ESPERA_SUBIR
         for altura in pared :
             if estado == ESPERA_SUBIR:
-                if altura >= altura_maq:
+                if altura > altura_maq:
                     estado = ESPERA_BAJAR
             elif estado == ESPERA_BAJAR:
-                if altura < altura_maq:
+                if altura <= altura_maq:
                     trazos += 1
-                    estado = ESPERA_BAJAR
+                    estado = ESPERA_SUBIR
         if estado == ESPERA_BAJAR:
             trazos += 1
 
