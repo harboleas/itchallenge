@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Submarinos
 # 
 # Entre los días 02/10/84 y 04/10/84 se capturaron mensajes emitidos por varios submarinos. Diversos informes indican la actividad de las siguientes naves: REDOCTOBER y NAUTILUS.

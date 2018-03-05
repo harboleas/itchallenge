@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Dentro del equipo de IT de Meli ha surgido una banda de nivel internacional, "Mondiola Rock", para la cual surgen contínuamente solicitudes de presentación alrededor del mundo.
 # 
 # Se han identificado todas las cuidades que solicitan una presentación de la banda y se ha encontrado que la ganancia a obtener en cada ciudad guarda una relación lineal con la población de la cuidad.

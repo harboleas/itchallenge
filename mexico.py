@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # En Mercado Pago tenemos un servidor corriendo un servicio Rest que cada tanto falla.
 # 
 # Después de un estudio muy minucioso pudimos aislar la clase donde sabemos que ocurre la falla. Lamentablemente hemos perdido el código fuente y solo disponemos del .class

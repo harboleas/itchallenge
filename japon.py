@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Un grupo de científicos japoneses detectó una señal pirata de televisión en la red de satélites de Japón.
 # 
 # Al parecer una cadena de televisión (no oficial) de China, que quería saltar el firewall del gobierno chino, estaba inyectando esta señal para poder comunicarse con sus aliados en la querida Ilha Formosa, «Isla Hermosa» (más conocida hoy como Taiwan).

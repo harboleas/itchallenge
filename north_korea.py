@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Siendo un fanático de la optimización de recursos, Kim Jong Un (líder norcoreano) quiere que sus soldados gasten la menor cantidad de energía en caso de tener que abordar el nuevo barco de combate eléctrico desarrollador por los ingenieros militares.
 # 
 # El barco tiene forma circular, y varios compartimentos (3 ≤ c ≤ 1000) (salas de máquinas, cocina, sala de control) los cuales pueden albergar diferentes cantidades de soldados.

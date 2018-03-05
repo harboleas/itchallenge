@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Encontrar la palabra de 8 caracteres que solo contenga las siguientes letras:
 # 
 # acdegilmnoprstuw

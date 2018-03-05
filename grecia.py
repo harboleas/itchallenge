@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Los números han fascinado a la humanidad desde tiempos inmemoriales dado que rigen el orden de las cosas y las vicisitudes morales y mundanas del hombre.
 # 
 # Es sabido, que hay ciertos números muy especiales cuyo impacto es tan grande que de cambiar el universo no podría sostenerse. Entre estos números encontramos constantes como la velocidad de la luz en el vacío o aquel que representa el sentido mismo de la vida.

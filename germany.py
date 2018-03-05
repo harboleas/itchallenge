@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # El superagente 86 ha caído prisionero de Kaos, junto con la 99, el 13 y 44.
 # 
 # Siegfried le propone al agente 86 liberarlos, si el confiesa la contraseña de acceso al cuartel general de Control. De lo contrario Él y sus compañeros serán condenados al laberinto de kaos.

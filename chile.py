@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 #Como todo programador, en el día a día nos preocupa respetar principios como DRY. Para esto, deseamos escribir una aplicación que nos permita en forma automática encontrar código duplicado.
 #
 #Como primer prueba de concepto, se le ha encargado escribir un programa capaz de encontrar el substring más largo que se encuentre repetido dentro de un mismo texto.

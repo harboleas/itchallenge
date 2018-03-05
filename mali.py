@@ -1,14 +1,18 @@
-# Buchu, nuestro coleccionista de insectos y coreografo, tiene una tablero de damas donde suele desparramar pulgas para que las mismas ejecuten pasos de baile.
+
+# coding: utf-8
+
+# Buchu, nuestro coleccionista de insectos y coreógrafo, tiene una tablero de damas donde suele desparramar pulgas para que las mismas ejecuten pasos de baile.
 # 
-# La coreografia que le enseno consiste en que cada una de las pulgas debe situarse en una casilla, cuando las 100 estan en su posicion, Buchu toca el silbato y las pulgas saltan al casillero anexo (pueden saltar para las cuatro casillas anexas, salvo las del borde, no se pueden salir del tablero). 
+# La coreografía que le enseñó consiste en que cada una de las pulgas debe situarse en una casilla, cuando las 100 están en su posición, Buchu toca el silbato y las pulgas saltan al casillero anexo (pueden saltar para las cuatro casillas anexas, salvo las del borde, no se pueden salir del tablero). 
 # 
-# Estan tan bien entrenadas que cuando saltan saben que no tienen que cruzar el mismo borde de cada casilla, sino chocarian en el aire.
+# Están tan bien entrenadas que cuando saltan saben que no tienen que cruzar el mismo borde de cada casilla, sino chocarían en el aire.
 # 
-# Obviamente tambien caen todas en una casilla diferente, siempre hay una pulga por casilla, es un salto coordinado perfecto.
+# Obviamente también caen todas en una casilla diferente, siempre hay una pulga por casilla, es un salto coordinado perfecto.
 # 
-# Buchu, es tan meticuloso, que siempre quiere una coreografia distinta, y se propuso a anotar todas las diferentes opciones que el salto sincronizado de pulgas puede generar. 
+# Buchu, es tan meticuloso, que siempre quiere una coreografía distinta, y se propuso a anotar todas las diferentes opciones que el salto sincronizado de pulgas puede generar. 
 # 
-# Cual es este numero
+# ¿Cuál es este número?
+# 
 
 def contar_coreos(n, m, k=0, tablero=None):
     """Cuenta las coreografias de las pulgas

@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Hoy existen muchos lenguajes de programacion disponibles entre ellos hay un subgrupo muy particular conocidos como "Lenguajes exoticos" por su naturaleza particular, quizas no son los mas útiles del mundo pero nos permiten explorar nuevas formas de pensar.
 # 
 # Nos llegó el siguiente código escrito en algún extraño lenguaje de programación, con la peculiar característica de que durante su interpretación el programa se va desplazando físicamente por el código, con operadores de movimiento (<, >, ^, v):

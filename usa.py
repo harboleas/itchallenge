@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Últimas noticias en Metrópolis, Jimmy Olsen inseparable colega de Clark Kent e intrépido socio de Superman ha desaparecido. La única pista tras su desaparición es un curioso mail recibido por Clark y Lois con el siguiente contenido:
 # 
 # Estimados Lois & Clark:

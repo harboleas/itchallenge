@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Tras seguir los pasos de un estafador, se secuestró una notebook que fue llevada al laboratorio forense para análisis. Entre los archivos de la computadora se encontró lo que parecería ser una lista de usuarios y contraseñas que uso el acusado para desarrollar sus tareas.
 # 
 # Contar con esa información podría permitir llegar al resto de la red delictiva, pero la misma se encuentra cifrada y el sospechoso se niega a revelar la clave.

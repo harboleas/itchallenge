@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # En las profundidades de la infraestructura de Mercado Libre estan pasando cosas extrañas. La gente del infraestructura no quiere revisar el rack 42B, dicen que apareció un antiguo server color terracota, que nunca nadie habia visto.
 # 
 # Despues de llamar a los cientificos de guardía (nosotros. obvio.) descrubrimos que desde ese server se estan creando imagenes en un viejo directorio compartido por NFS, que tampoco estaba ayer. Cada vez mas raro.

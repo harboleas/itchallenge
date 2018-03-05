@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Se tiene un cubo formado por letras, la dimensión del cubo es 21x21x21. Se desea recorrer todos los caminos posibles desde la celda (1,1,1) hasta la (21,21,21), con la restricción de que los movimientos posibles son incrementando uno y solo uno de los indices por vez.
 # 
 # Por ejemplo desde el punto (2,2,2) solo es posible pasar al (3,2,2) o al (2,3,2) o al (2,2,3). Pero no es posible ningún otro movimiento, por ejemplo no es posible pasar al (4,2,2) ni al (1,2,2)

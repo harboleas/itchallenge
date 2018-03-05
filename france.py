@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Durante la segunda guerra mundial, uno de los bandos quería atacar al otro en un punto clave, para realizarlo transmitía las coordenadas del punto entre sus aliados de la siguiente forma:
 # 
 # Latitud 3 bytes + 1 byte que correspondía al caracter ascii de la N o de la S

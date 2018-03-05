@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # El granjero Mariano, tiene una cabra que está todo el tiempo entrando en su granero y comiendo las frutas que tiene apiladas en la cocina.
 # 
 # La cantidad de frutas es infinita... tiene dos pilas de frutas, una de naranjas y otra de bananas.

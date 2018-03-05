@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Una máquina tiene que pintar una pared con diferentes alturas como la imagen siguiente:
 # 
 # https://mla-s2-p.mlstatic.com/977059-MLA25939519280_092017-F.jpg

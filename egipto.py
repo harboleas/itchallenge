@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Un grupo de arqueólogos de Mercadolibre descubrió una nueva momia en una pequeña pirámide en el Cairo.
 # 
 # Luego de analizar sus células con el mismo procesimiento que el Dr. Henry Wu en Jurasik Park 1, lograron reconstrir completamente su cadena de ADN.

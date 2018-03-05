@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # El mundo en el que vivimos esta gobernado por numeros, algunos muy interesantes:
 # 
 # Los números irracionales como PI o E no pueden representarse como una fracción de enteros

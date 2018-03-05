@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Estamos en el año 2057 y Bolivia es la nueva potencia mundial en términos de infraestructura. Al parecer luego de varios años de inestabilidad económica, descubrieron una mina de litio que abastece desde hace 40 años a todo el planeta. Hay rutas que cruzan por todo el país, estadios, edificios, ciudades,  el 90% de la población trabaja en construcción y en la mina de litio.
 
 #El país entero está dividido en una red cuadrículada (N x N) de ciudades, las cuales se conectan entre si por medio de Hyper Loops, es tan moderno, que no hay espacio para rutas, no se puede caminar o viajar en auto por las ciudades, las ciudades son monolitos conectados entre sí por las redes de Hyper Loops.

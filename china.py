@@ -1,3 +1,6 @@
+
+# coding: utf-8
+
 # Nos encontramos ante un escenario delicado en producción, donde una de nuestras java RESTFul APIs (crítica para el funcionamiento del site), sufre de inestabilidad aleatoria generando fluctuaciones en su response time por alta CPU. Nuestra área de operaciones nos envió información de diagnóstico de uno de los servers afectados la cual se compone de:
 # 
 # - top.txt: un top con la información de todos los threads ejecutándose en el server
