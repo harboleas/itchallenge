@@ -27,6 +27,8 @@ def busca_dup(texto):
             if s in texto[pos+lon:]:
                 encontrado = True
                 codigo_dup = s
+                print "encontrado longitud", lon, "en posicion", pos
+                print codigo_dup
                 i = pos
                 break
         # si no hay un string de longitud mayor que el ultimo encontrado, sale     
