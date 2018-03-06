@@ -30,4 +30,46 @@
 # Bananas incrementan: 17188 proteínas
 
 
+# Sean :
+# x la cantidad de naranjas antes de tomar agua
+# y idem anterior pero para las bananas
+# u la cantidad de naranjas despues de tomar agua
+# v idem para las bananas
+# N proteinas naranjas
+# B proteinas Bananas
+# C capacidad
+
+# Luego x,y,u,v deben satisfacer la siguiente condicion
+# (x*N + y*B) / 2 + u*N + v*B <= C
+
+# cotas superiores para x, y, u, v
+# x <= C * 2 / N
+# y <= C * 2 / B
+# u <= C / N
+# v <= C / B
+
+def calcula_max():
+
+    C = 25185
+    N = 109
+    B = 17188
+
+    max_x = C * 2 / N
+    max_y = C * 2 / B
+    max_u = C / N
+    max_v = C / B
+
+    maximo = 0
+
+    for x in range(max_x):
+        for y in range(max_y):
+            for u in range(max_u):
+                for v in range(max_v):
+                    llenado = (x*N + y*B)/2 + u*N + v*B
+                    if llenado <= C:
+                        if llenado > maximo:
+                            maximo = llenado
+
+    return maximo
+
 #  vim: set ts=4 sw=4 tw=79 et :
