@@ -7,87 +7,64 @@
 # 
 # Calcula la cantidad máxima de pasteles ricos distintos que pueden realizarse. 
 
-ingre = ["D", "F", "C", "M"]
+ingre = {"D": 3, "F": 3, "C": 3, "M": 1}
 
-def postre_valido(postre_vect):
+postre = [[None]*3 for i in range(3)]
 
-    vect = "".join(postre_vect)
+def cuenta_postres(n, ingre):
+    """Genera de forma recursiva todos los postres posibles y 
+       cuenta los ricos"""
 
-    if vect.count("M") > 1:
-        return False
-    for i in ingre[:-1]:
-        if vect.count(i) > 3:
-            return False
-
-    return True
-
-def fil_col_rica(fil_col):
-
-    p = fil_col[0]
-    if p == "M":
-        if fil_col[1] == fil_col[2]:
-            return True
+    if n == 9:
+#        print "Postre"
+#        for fila in postre:
+#            print fila
+        if postre_rico():
+            return 1
         else:
-            return False
+            return 0
+
     else:
-        for i in fil_col[1:]:
-            if i != "M" and i != p:
-                return False
-        return True
+        contador = 0
+        for k, v in ingre.items():
+            if v:
+                i = n / 3
+                j = n % 3
+                postre[i][j] = k
+                ingre_aux = ingre.copy()
+                ingre_aux[k] -= 1
+                contador += cuenta_postres(n+1, ingre_aux)
+
+        return contador
 
 
-def postre_rico(postre):
+def postre_rico():
 
-    for i in xrange(3):
-        res = fil_col_rica(postre[i])
-        if res:
-            return True
+    for fila in postre:
+        if "M" not in fila:
+            if fila == [fila[0]]*3:
+                return True
+        else:
+            i = fila.index("M")
+            if fila[i-1] == fila[i-2]:
+                return True
 
-    for j in xrange(3):
-        col = [postre[0][j], postre[1][j], postre[2][j]]
-        res = fil_col_rica(col)
-        if res:
-            return True
+    # trasponer
+    postre_t = [[None]*3 for i in range(3)]
+    for i in range(3):
+        for j in range(3):
+            postre_t[j][i] = postre[i][j]
+
+    for fila in postre_t:
+        if "M" not in fila:
+            if fila == [fila[0]]*3:
+                return True
+        else:
+            i = fila.index("M")
+            if fila[i-1] == fila[i-2]:
+                return True
 
     return False
 
-def simetrico_h(post):
-
-    if post[0] == post[2]:
-        return True
-    else:
-        return False
-
-
-def simetrico_v(post):
-
-    a = [post[0][0], post[1][0], post[2][0]]
-    b = [post[0][2], post[1][2], post[2][2]]
-
-    if a == b:
-        return True
-    else:
-        return False
-
-
-def cuenta_postres():
-
-    cant = 0
-    sim_v = 0
-    sim_h = 0
-
-    for i in xrange(4**9):
-        post = num_base(i, ingre, 9)
-        if not postre_valido(post):
-            continue
-        postre = arma_matriz(post, 3, 3)
-        if postre_rico(postre):
-            cant += 1
-            if simetrico_h(postre):
-                sim_h += 1
-            if simetrico_v(postre):
-                sim_v += 1
-
-    return cant, sim_h, sim_v
 
 #  vim: set ts=4 sw=4 tw=79 et :
