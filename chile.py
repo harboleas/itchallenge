@@ -17,12 +17,22 @@ def busca_dup(texto):
     n = len(texto)
     mitad = n / 2
     i = 0
+
+    codigo_dup = None
+
     for lon in xrange(mitad):
+        encontrado = False
         for pos in xrange(i, n-2*lon):
             s = texto[pos:pos+lon]
             if s in texto[pos+lon:]:
-                print s
+                encontrado = True
+                codigo_dup = s
                 i = pos
                 break
+        # si no hay un string de longitud mayor que el ultimo encontrado, sale     
+        if not encontrado:
+            return codigo_dup
+
+t = open("level15.txt").read()
 
 #  vim: set ts=4 sw=4 tw=79 et :
