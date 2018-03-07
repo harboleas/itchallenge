@@ -39,12 +39,13 @@
 # B proteinas Bananas
 # C capacidad
 
-# Luego x,y,u,v deben satisfacer la siguiente condicion
+# Luego x,y,u,v deben satisfacer la siguientes condiciones
+# x*N + y*B <= C
 # (x*N + y*B) / 2 + u*N + v*B <= C
 
 # cotas superiores para x, y, u, v
-# x <= C * 2 / N
-# y <= C * 2 / B
+# x <= C / N
+# y <= C / B
 # u <= C / N
 # v <= C / B
 
@@ -54,8 +55,8 @@ def calcula_max():
     N = 109
     B = 17188
 
-    max_x = C * 2 / N
-    max_y = C * 2 / B
+    max_x = C / N
+    max_y = C / B
     max_u = C / N
     max_v = C / B
 
@@ -65,10 +66,11 @@ def calcula_max():
         for y in range(max_y):
             for u in range(max_u):
                 for v in range(max_v):
-                    llenado = (x*N + y*B)/2 + u*N + v*B
-                    if llenado <= C:
-                        if llenado > maximo:
-                            maximo = llenado
+                    llenado_1 = x*N + y*B
+                    llenado_2 = (x*N + y*B)/2 + u*N + v*B
+                    if llenado_1 <= C and llenado_2 <= C:
+                        if llenado_2 > maximo:
+                            maximo = llenado_2
 
     return maximo
 
