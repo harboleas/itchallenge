@@ -1,9 +1,11 @@
 # Puede pensarse que una coreografia (sin considerar los sentidos de giro) 
 # en un tablero de NxN, es un subgrafo del grafo compuesto por los 
 # vertices y aristas del tablero original sin las casillas del borde.
+# Este subgrafo se construye con los vertices que quedan dentro de cada
+# ciclo de la coreo y de las aristas que no son cortadas por los ciclos
 
-# Esto es, existe una biyeccion entre el conjunto de coreos y
-# un subconjunto de todos los subgrafos
+# Se puede probar que esta construccion es una biyeccion entre el conjunto 
+# de coreos y un subconjunto de todos los subgrafos
 
 ####################################################################
 # Ejemplo de coreografia valida en un Tablero de 4x4, con su grafo:
