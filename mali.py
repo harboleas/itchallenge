@@ -16,11 +16,8 @@
 #  |  *...........*  |
 #  X <-- X <-- X <-- X
 # 
-# Las X y las flechas representan las pulgas el sentido del salto,
-# y los asteriscos y puntos, el subgrafo 
-
-# Esto es, existe una funcion biyectiva entre el conjunto de coreos y 
-# un subconjunto de todos los subgrafos.
+# Las X y las flechas representan las pulgas y los saltos,
+# y los asteriscos y puntos, el subgrafo correspondiente 
 
 
 def base2(n, size):
