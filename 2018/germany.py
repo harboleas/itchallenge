@@ -213,4 +213,6 @@ def cuenta_cuad(suma, n=0, cuad=None, posibles=None):
 
         return cant
 
-#acumulado de 0 a 6 1405009
+#acumulado de 0 a 7 3141816
+#total 3141816*2 = 6283632
+
