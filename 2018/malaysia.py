@@ -119,14 +119,26 @@ def parser(datos, f):
             f.write('¡No encontrado!\n')
 
     print
-    
-    f.write("\n")
 
+#    f.write("\n")
     return raiz
 
 raices = []
 for i in files:
     raices.append(parser(i, f))
-
 f.write("\n")
 f.close()
+
+from hashlib import sha256
+
+f = open("malaysia_resul.txt")
+datos = f.read()
+f.close()
+
+sha = sha256(datos)
+
+print sha.hexdigest().upper()
+
+
+
+

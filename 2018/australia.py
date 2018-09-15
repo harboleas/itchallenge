@@ -54,6 +54,7 @@ f = open("ejem_australia.txt")
 datos2 = f.readlines()
 f.close()
 
+no = "¡No encontrado!"
 
 class Tag(object):
 
@@ -85,15 +86,21 @@ def parser(datos, f):
             obj = obj._crear(tag)
 
     for linea in consul:
-        linea = linea.replace("~", ".")[:-1]
+        if "~" not in linea:
+           print no,
+           f.write(no+" ")
 
-        try:
-            exec("print "+"raiz."+linea+",")
-            exec("f.write(raiz."+linea+")")
-            f.write(" ")
-        except:
-            exec("print '¡No encontrado!',")
-            f.write('¡No encontrado! ')
+
+        else:
+            linea = linea.replace("~", ".")[:-1]
+
+            try:
+                exec("print "+"raiz."+linea+",")
+                exec("f.write(raiz."+linea+")")
+                f.write(" ")
+            except:
+                exec("print '"+no+"',")
+                f.write(no+" ")
 
     print
 

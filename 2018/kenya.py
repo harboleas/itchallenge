@@ -15,7 +15,7 @@ def cuenta_piedras(cadena):
 
     d = {}
 
-    for c in cadena[:-1]:
+    for c in cadena:
         if not d.has_key(c):
             d[c] = 1
         else:
