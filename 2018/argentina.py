@@ -68,8 +68,15 @@ def num_ALPACA(n):
 
     return num_A(n-2)
 
+from utils import factorizar
 
-#resultado = num_ALPACA(234612846789231) % 123456789
+n = 234612846789231
+m = 123456789
+
+# x = 1
+# while (2**x) % (3*m) != 1:
+#     x += 1
+
 
 
 
