@@ -53,6 +53,7 @@ def cuenta_sub(cadena):
             if not palabras.has_key(pal):
                 palabras[pal] = 1
                 cant += 1
+#                print cant, lon
 
     return cant
 

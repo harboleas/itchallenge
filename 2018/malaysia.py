@@ -111,6 +111,8 @@ def parser(datos):
         except:
             respuestas.append(no+"\n")
 
+#    respuestas.append("\n")
+
     return "".join(respuestas), raiz
 
 
@@ -130,7 +132,7 @@ for i in range(1,16):
 
 f = open("malaysia_resul.txt","w")
 f.writelines(respuestas)
-f.write("\n")
+#f.write("\n")
 f.close()
 
 from hashlib import sha256
