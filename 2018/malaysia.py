@@ -57,13 +57,6 @@
 # 
 #https://www.dropbox.com/s/tdpttblm5ez64vq/HRML%20Parser.zip?dl=0
 
-files = []
-for i in range(1,16):
-
-    f = open("HRML/input-"+str(i).zfill(2)+".hrml")
-    files.append(f.readlines())
-    f.close()
-
 
 
 class Tag(object):
@@ -77,15 +70,16 @@ class Tag(object):
         obj.padre = self
         return obj
 
-f = open("malaysia_resul.txt", "w")
 
-def parser(datos, f):
+def parser(datos):
 
     n, q = [int(i) for i in datos[0][:-1].split(" ")]
 
-    print "Consultas"
-    print
+    print n, q
 
+    no = "Not Found!"
+
+    respuestas = []
     codigo = datos[1:n+1]
     consul = datos[n+1:n+q+1]
     raiz = Tag()
@@ -108,24 +102,34 @@ def parser(datos, f):
                 obj = obj._crear(tag)
 
     for linea in consul:
+
         linea = linea.replace("~", ".")[:-1]
 
         try:
-            exec("print raiz."+linea)
-            exec("f.write(raiz."+linea+")")
-            f.write("\n")
+            exec("r = raiz."+linea)
+            respuestas.append(r+"\n")
         except:
-            print "¡No encontrado!"
-            f.write('¡No encontrado!\n')
+            respuestas.append(no+"\n")
 
-    print
+    return "".join(respuestas), raiz
 
-#    f.write("\n")
-    return raiz
 
+respuestas = []
 raices = []
-for i in files:
-    raices.append(parser(i, f))
+for i in range(1,16):
+
+    f = open("HRML/input-"+str(i).zfill(2)+".hrml")
+    resp, raiz = parser(f.readlines())
+    print resp
+    raices.append(raiz)
+    respuestas.append(resp)
+    f.close()
+    f = open("HRML/output-"+str(i).zfill(2),"w")
+    f.write(resp)
+    f.close()
+
+f = open("malaysia_resul.txt","w")
+f.writelines(respuestas)
 f.write("\n")
 f.close()
 

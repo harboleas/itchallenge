@@ -54,7 +54,7 @@ f = open("ejem_australia.txt")
 datos2 = f.readlines()
 f.close()
 
-no = "¡No encontrado!"
+no = "Not Found!"
 
 class Tag(object):
 
@@ -89,7 +89,6 @@ def parser(datos, f):
         if "~" not in linea:
            print no,
            f.write(no+" ")
-
 
         else:
             linea = linea.replace("~", ".")[:-1]

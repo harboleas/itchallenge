@@ -63,19 +63,30 @@ def num_A(n):
         return int((2**(n+1) - 1)/3.0)
 
 
-
 def num_ALPACA(n):
 
     return num_A(n-2)
 
 from utils import factorizar
 
+
+# Tengo que resolver 2**(n-1) - 1 = 3*x (mod 3*m)
+
 n = 234612846789231
 m = 123456789
 
-# x = 1
-# while (2**x) % (3*m) != 1:
-#     x += 1
+q = factorizar(n-1)[::-1]
+
+r = (2**q[0]) % (3*m)
+
+for i in range(1, len(q)):
+    r = (r**q[i]) % (3*m)
+
+x = 0
+
+while (3*x + 1 - r) % (3*m) != 0:
+    x += 1
+
 
 
 
