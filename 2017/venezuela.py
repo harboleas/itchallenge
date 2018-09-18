@@ -22,8 +22,8 @@
 # 1 4 5 6 7 8 15 12 9 4 9 8 12 14 22 45 67 89 87 86 85 23 56 67 21 88 11 44 56 91 67 45 
 # 45 45 45 45 44 21 89 90 90 87 45 91 12 45 57
 
-ESPERA_SUBIR = 0
-ESPERA_BAJAR = 1
+ESPERA_INI = 0
+ESPERA_FIN = 1
 
 def contar_trazos(pared):
 
@@ -31,18 +31,28 @@ def contar_trazos(pared):
 
     trazos = 0
     for altura_maq in range(alt_max):
-        estado = ESPERA_SUBIR
+        estado = ESPERA_INI
         for altura in pared :
-            if estado == ESPERA_SUBIR:
+            if estado == ESPERA_INI:
                 if altura > altura_maq:
-                    estado = ESPERA_BAJAR
-            elif estado == ESPERA_BAJAR:
-                if altura <= altura_maq:
                     trazos += 1
-                    estado = ESPERA_SUBIR
-        if estado == ESPERA_BAJAR:
-            trazos += 1
+                    estado = ESPERA_FIN
+            elif estado == ESPERA_FIN:
+                if altura <= altura_maq:
+                    estado = ESPERA_INI
 
     return trazos
+
+
+def contar_trazos2(pared):
+
+    trazos = pared[0]
+    for i in range(len(pared) - 1):
+        delta = pared[i+1] - pared[i]
+        if delta > 0:
+            trazos += delta
+    return trazos
+
+
 
 #  vim: set ts=4 sw=4 tw=79 et :
