@@ -229,4 +229,49 @@ def filtro(pos_rel, cant):
 
     return aux
 
+izq = filtro("izq", 0)
+#der = filtro("der", 0)
+#arr = filtro("arr", 0)
+#aba = filtro("aba", 0)
+
+def gen_img(pos, i=0, j=0, d=None):
+
+
+    if i==j==0:
+        d = {(0,0): pos}
+
+    pos_izq = posibles_izq(pos)
+    pos_der = posibles_der(pos)
+    pos_aba = posibles_aba(pos)
+    pos_arr = posibles_arr(pos)
+
+
+    if i < -18 or i > 18:
+        return d
+
+    if j < -18 or j > 18:
+        return d
+
+    if not d.has_key((i,j-1)):
+        if len(pos_izq) == 1:
+            d[(i,j-1)] = pos_izq[0]
+            gen_img(pos_izq[0], i, j-1, d)
+
+    if not d.has_key((i,j+1)):
+        if len(pos_der) == 1:
+            d[(i,j+1)] = pos_der[0]
+            gen_img(pos_der[0], i, j+1, d)
+
+    if not d.has_key((i-1,j)):
+        if len(pos_arr) == 1:
+            d[(i-1,j)] = pos_arr[0]
+            gen_img(pos_arr[0], i-1, j, d)
+
+    if not d.has_key((i+1,j)):
+        if len(pos_aba) == 1:
+            d[(i+1,j)] = pos_aba[0]
+            gen_img(pos_aba[0], i+1, j, d)
+
+    return d
+
 
