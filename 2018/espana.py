@@ -14,10 +14,10 @@
 
 def num_pag(x, y, z):
 
-    b = 1
-    x_ = float(x)
-    while z-y != 2*len(str(round(x_/b))) + 1 + b:
-        b += 1
+    cant_pag = 1
 
-    return int(round(x_/b))
+    while x > cant_pag * (z - y - 2*len(str(cant_pag)) - 1):
+        cant_pag += 1
+
+    return cant_pag
 
