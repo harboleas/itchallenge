@@ -145,7 +145,7 @@ def gen_posibles(n):
         return posibles_sig
 
 
-    elif i > 0 and j == 0:
+    elif 0 < i and j == 0:
         ii, jj = orden_mat[i-1,j]
         cuadro = cuadros[ii][jj]
 
@@ -169,7 +169,7 @@ def gen_posibles(n):
 
         return posibles_sig
 
-    elif 19 > i > 0 and j == 19:
+    elif 0 < i < 19 and j == 19:
         i1, j1 = orden_mat[i,j-1]
 
         cuad1 = cuadros[i1][j1]
@@ -197,7 +197,7 @@ def gen_posibles(n):
         return posibles_sig
 
 
-    else:
+    elif 0 < i < 19 and 0 < j < 19:
 
         i1, j1 = orden_mat[i,j-1]
         i2, j2 = orden_mat[i-1,j]
@@ -219,6 +219,35 @@ def gen_posibles(n):
                         posibles_sig.append((p,q))
         return posibles_sig
 
+    else:
+
+        i1, j1 = orden_mat[i-1,j]
+
+        cuad1 = cuadros[i1][j1]
+
+        c1 = cuad1[C]
+        c2 = cuad1[D]
+
+        posibles_sig = []
+
+        for p,q in aux:
+            aux_cuad = cuadros[p][q]
+            if np.all(c1 == aux_cuad[A]):
+                if np.all(c2 == aux_cuad[B]):
+                    if np.all(NEGRO == aux_cuad[C]):
+                        if np.all(NEGRO == aux_cuad[D]):
+                            posibles_sig.append((p,q))
+                        elif np.all(BLANCO == aux_cuad[D]):
+                            posibles_sig.append((p,q))
+                    elif np.all(BLANCO == aux_cuad[C]):
+                        if np.all(NEGRO == aux_cuad[D]):
+                            posibles_sig.append((p,q))
+                        elif np.all(BLANCO == aux_cuad[D]):
+                            posibles_sig.append((p,q))
+
+
+        return posibles_sig
+
 
 def buscar_orden(n=0, posibles=None):
 
@@ -238,10 +267,8 @@ def buscar_orden(n=0, posibles=None):
     else:
         for x in posibles:
             orden_mat[i,j] = x
-            show_imag()
-#            raw_input()
+#            show_imag()
             posibles_sig = gen_posibles(n+1)
-#            print n, posibles_sig
             aux = buscar_orden(n+1, posibles_sig)
             if not (aux is None):
                 return aux
@@ -250,6 +277,11 @@ def buscar_orden(n=0, posibles=None):
 def show_imag():
 
     cv2.imshow(" ",ordenar(cuadros, orden_mat))
-    cv2.waitKey(1)
+    cv2.waitKey(0)
+
+buscar_orden()
+
+img_out = ordenar(cuadros, orden_mat)
+cv2.imwrite("canada_out.jpg", img_out)
 
 
