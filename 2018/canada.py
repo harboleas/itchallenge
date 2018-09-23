@@ -282,7 +282,7 @@ def buscar_orden(n=0, posibles=None):
     else:
         for x in posibles:
             orden_mat[i,j] = x
-#            show_imag()
+            show_imag()
             posibles_sig = gen_posibles(n+1)
             aux = buscar_orden(n+1, posibles_sig)
             if not (aux is None):
@@ -292,12 +292,12 @@ def buscar_orden(n=0, posibles=None):
 def show_imag():
 
     cv2.imshow(" ",ordenar(cuadros, orden_mat))
-    cv2.waitKey(0)
+    cv2.waitKey(1)
 
 buscar_orden()
 
-img_out = ordenar2()
-cv2.imwrite("canada_out2.jpg", img_out)
+#img_out = ordenar2()
+#cv2.imwrite("canada_out2.jpg", img_out)
 
 
 # Resultado de la lectura del QR = #Developers!
