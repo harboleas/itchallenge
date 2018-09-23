@@ -13,6 +13,8 @@ img = cv2.imread("ImagenIndescifrable.png")
 
 cuadros = [[img[i*50:i*50+50, j*50:j*50+50,:] for j in range(20)] for i in range(20)]
 
+cuadros2 = [[cuadros[i][j][11:40,11:40,:] for j in range(20)] for i in range(20)]
+
 ##############
 # A        B #
 #            #
@@ -38,6 +40,19 @@ def ordenar(cuadros, orden_mat):
             imag_out[i*50:i*50+50,j*50:j*50+50,:] = cuadros[ii][jj]
 
     return imag_out
+
+
+def ordenar2():
+
+    imag_out = np.zeros((29*20,29*20,3),dtype=np.uint8)
+
+    for i in range(20):
+        for j in range(20):
+            ii, jj = orden_mat[i,j]
+            imag_out[i*29:i*29+29,j*29:j*29+29,:] = cuadros2[ii][jj]
+
+    return imag_out
+
 
 
 orden_mat = np.zeros((20,20,2), dtype = np.uint8)
@@ -281,7 +296,9 @@ def show_imag():
 
 buscar_orden()
 
-img_out = ordenar(cuadros, orden_mat)
-cv2.imwrite("canada_out.jpg", img_out)
+img_out = ordenar2()
+cv2.imwrite("canada_out2.jpg", img_out)
 
+
+# Resultado de la lectura del QR = #Developers!
 
