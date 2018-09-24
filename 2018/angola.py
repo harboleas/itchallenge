@@ -29,3 +29,77 @@
 #Sample Output:
 #3793375
 #
+
+import math
+
+def pos_fila(m):
+
+    m_b = m / 2
+    m_c = m / 3
+    m_d = m / 4
+
+    pos = []
+
+    for a in range(m+1):
+        for b in range(m_b+1):
+            for c in range(m_c+1):
+                for d in range(m_d+1):
+                    if a + 2*b + 3*c +4*d == m:
+                        pos.append((a,b,c,d))
+
+    return pos
+
+
+def comb(n, k):
+
+    return math.factorial(n) / (math.factorial(n-k) * math.factorial(k))
+
+
+def cuenta_fila(fila):
+
+    cant = 1
+
+    suma = sum(fila)
+
+    for x in fila:
+        cant *= comb(suma, x)
+        suma -= x
+
+    return cant
+
+
+def contar2(m):
+
+    cant = 0
+    for fila in pos_fila(m):
+        cant += cuenta_fila(fila)
+
+    return cant
+
+
+def contar(m, n=0, posibles=None, fila=None):
+
+    if n==0:
+        fila = [0]*(m-1)
+        posibles = [0, 1]
+
+
+    if n == m-2:
+#        for x in posibles:
+#            fila[n] = x
+#            print fila
+        return len(posibles)
+
+    else:
+        cant = 0
+        for x in posibles:
+            fila[n] = x
+            posibles_sig = [0, 1]
+            if n >= 2:
+                if sum(fila[n-2:n+1]) == 0:
+                    posibles_sig = [1]
+            cant += contar(m, n+1, posibles_sig, fila)
+        return cant
+
+
+

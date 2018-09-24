@@ -46,7 +46,7 @@ def busca_coord(coord):
             return k
 
 
-clave = {1:"e", 9:"a", 55:"o", 5:"s", 19:"n"}
+clave = {1:"e", 9:"a", 5:"o", 19:"s", 16:"r", 25:"n", 4:"i"}
 
 
 def deco():
