@@ -21,117 +21,95 @@ tres = np.array([[0, 0, 0, 0, 3],
                  [2, 0, 0, 1, 0],
                  [0, 0, 3, 0, 0]])
 
-#def valido(cuad, suma):
+
+#def gen_filas():
+#    """Genera las posibles filas"""
 #
-#    sum_col = 0
-#    for i in range(5):
-#        sum_col += cuad[i,:]
-#    if not np.all(sum_col == suma):
-#        return False
-#    else:
-#        if cuad.trace() == cuad[:,::-1].trace() == suma :
-#            return True
+#    filas = []
+#    for i in xrange(4**5):
+#        aux = []
+#        n = i
+#        for j in range(5):
+#            aux.append(n % 4)
+#            n = n / 4
+#        filas.append(np.array(aux))
+#
+#    return filas
+#
+#
+#def gen_sumas(filas):
+#    """Agrupa las filas por suma constante"""
+#    d = {}
+#
+#    for fila in filas:
+#        s = fila.sum()
+#        if not d.has_key(s):
+#            d[s] = [fila]
 #        else:
+#            d[s].append(fila)
+#
+#    return d
+#
+#
+#def gen_pos_sig(n, s, cuad, sumas):
+#
+#    pos = []
+#    for x in sumas[s]:
+#        cuad[n,:] = x
+#        for i in range(5):
+#            sum_aux = cuad[:n+1,i].sum()
+#            if sum_aux > s:
+#                break
+#        else:
+#            if cuad.diagonal()[:n+1].sum() <= s:
+#                if cuad[:,::-1].diagonal()[:n+1].sum() <= s:
+#                    pos.append(x)
+#    return pos
+#
+#
+#def valido(cuad, s):
+#
+#    for i in range(5):
+#        sum_aux = cuad[:,i].sum()
+#        if sum_aux != s:
 #            return False
+#    else:
+#        if cuad.diagonal().sum() == s:
+#            if cuad[:,::-1].diagonal().sum() == s:
+#                return True
+#
+#    return False
 #
 #
-#def gen_filas(suma):
-#    """Genera las posibles filas de suma constante"""
 #
-#    filas = []
-#    for a in range(4):
-#        if a > suma:
-#            break
-#        for b in range(4):
-#            if a + b > suma:
-#                break
-#            for c in range(4):
-#                if a + b + c > suma:
-#                    break
-#                for d in range(4):
-#                    if a + b + c + d > suma:
-#                        break
-#                    else:
-#                        e = suma-a-b-c-d
-#                        filas.append(np.array((a,b,c,d,e)))
-#    return filas
-#
-#def gen_fila(n, suma, cuad):
-#    """Genera las posibles filas de la posicion n, de suma constante"""
-#
-#    aux = cuad.copy()
-#    s_diag1 = aux.diagonal()[:n].sum()
-#    s_diag2 = aux[:,::-1].diagonal()[:n].sum()
-#    s = np.zeros(5)
-#    for i in range(n):
-#        s += aux[i, :]
-#    filas = []
-#    for a in range(4):
-#        if a + s[0] > suma:
-#            break
-#        elif n == 4 and a+s_diag2 > suma:
-#            break
-#
-#        for b in range(4):
-#            if a + b > suma or b + s[1] > suma:
-#                break
-#            elif n == 1 and b + s_diag1 > suma:
-#                break
-#            elif n == 3 and b + s_diag2 > suma:
-#                break
-#
-#            for c in range(4):
-#                if a + b + c > suma or c + s[2] > suma:
-#                    break
-#                elif n == 2 and c + s_diag1 > suma:
-#                    break
-#                elif n == 2 and c + s_diag2 > suma:
-#                    break
-#
-#                for d in range(4):
-#                    if a + b + c + d > suma or d + s[3] > suma:
-#                        break
-#                    elif n == 1 and d + s_diag2 > suma:
-#                        break
-#                    elif n == 3 and d + s_diag1 > suma:
-#                        break
-#                    else:
-#                        e = suma-a-b-c-d
-#                        if e + s[4] > suma:
-#                            continue
-#                        elif n == 4 and e + s_diag1 > suma:
-#                            continue
-#                        elif 0 <= e <= 3:
-#                            filas.append(np.array((a,b,c,d,e)))
-#    return filas
-#
-#
-#cuad = np.zeros((5,5))
-#
-#
-#def cuenta_cuads(suma, n, posibles, cuad):
+#def contar(s, n, posibles, cuad, sumas):
 #
 #    cant = 0
 #
 #    if n == 4:
 #        for ultima_fila in posibles:
 #            cuad[n,:] = ultima_fila
-#            if valido(cuad, suma):
+#            if valido(cuad, s):
 #                cant += 1
 #        return cant
 #
 #    else:
 #        for fila_n in posibles:
 #            cuad[n,:] = fila_n
-#            posibles_sig = gen_fila(n+1, suma, cuad)
-#            cant += cuenta_cuads(suma, n+1, posibles_sig, cuad)
+#            posibles_sig = gen_pos_sig(n+1, s, cuad, sumas)
+#            cant += contar(s, n+1, posibles_sig, cuad, sumas)
 #
 #        return cant
 #
 #
-#def cuenta(suma):
+#filas = gen_filas()
+#sumas = gen_sumas(filas)
+#cuad = np.zeros((5,5))
 #
-#    return cuenta_cuads(suma, 0, gen_filas(suma), np.zeros((5,5)))
+#
+#def cuenta(s):
+#
+#    return contar(s, 0, sumas[s], cuad, sumas)
 
 
 def gen_posibles_sig(suma, n, cuad):
