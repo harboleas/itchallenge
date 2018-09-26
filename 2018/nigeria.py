@@ -11,7 +11,7 @@ img = cv2.imread("Texto Chino.png")
 filas, cols = img.shape[:-1]
 
 cant_col = 59
-cant_fil = 5
+cant_fil = 6
 
 d_col = 17
 d_fil = 17
