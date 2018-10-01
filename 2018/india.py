@@ -46,14 +46,52 @@ def cuenta_sub(cadena):
 
     cant = 0
     for lon in range(1,n+1):
-#        print palabras
         palabras = {}
         for i in range(n+1-lon):
             pal = cadena[i:i+lon]
             if not palabras.has_key(pal):
                 palabras[pal] = 1
                 cant += 1
-#                print cant, lon
+
+    return cant
+
+
+def comp(cadena1, cadena2):
+
+    # len(cadena2) debe ser menor o igual que len(cadena1) 
+
+    for i in range(len(cadena2)):
+        if cadena1[i] != cadena2[i]:
+            return i
+    return i + 1
+
+
+def cuenta_sub2(cadena):
+
+    n = len(cadena)
+
+    cant = 0
+
+    letras = {}
+    for i,c in enumerate(cadena):
+        if not letras.has_key(c):
+            letras[c] = [i]
+        else:
+            letras[c].append(i)
+
+    for k, v in letras.items():
+        aux = []
+        for i in range(len(v)):
+            aux.append(cadena[v[i]:])
+            cant += len(aux[i])
+
+        for i in range(1,len(v)):
+            max_solapa = 1
+            for j in range(i):
+                solapa = comp(aux[j], aux[i])
+                if solapa > max_solapa:
+                    max_solapa = solapa
+            cant -= max_solapa
 
     return cant
 
