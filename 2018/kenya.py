@@ -16,12 +16,10 @@ def cuenta_piedras(cadena):
     d = {}
 
     for c in cadena:
-        if not d.has_key(c):
-            d[c] = 1
-        else:
-            d[c] += 1
+        d[c] = d.get(c, 0) + 1
 
     return d
+
 
 datos_piedras = [cuenta_piedras(cadena[:-1]) for cadena in datos]
 
