@@ -6,3 +6,20 @@
 # 
 # Has sido asignado la resolución de esta incógnita: ¿qué cantidad de formas distintas de disponer las planchas van a tener que evaluar para tomar una decisión?
 # 
+
+from math import factorial
+
+def comb(n, m):
+
+    return factorial(n) / (factorial(m) * factorial(n-m))
+
+cant = 0
+
+for i in range(32/3 + 1):
+
+    cant += comb(32-3*i+i, i)
+
+print cant
+
+
+
